@@ -22,6 +22,12 @@ body {
     background: #f4f4f4;
 }
 
+@media screen and (max-width: 450px) {
+    body {
+        background-color: white;
+    }
+}
+
 nav,
 header,
 footer,
