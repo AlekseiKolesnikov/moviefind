@@ -1,0 +1,23 @@
+@import "../../../assets/styles/variables.css";
+
+.layout-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.layout-content-sider-container {
+    width: var(--desktop-content-container-width);
+    height: calc(100vh - 230px);
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
+    .layout-content-sider-container {
+        max-width: var(--tablet-content-container-width);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .layout-content-sider-container {
+        max-width: 100%;
+    }
+}

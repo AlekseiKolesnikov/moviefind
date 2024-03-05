@@ -1,0 +1,107 @@
+.center-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-flex-star {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.start-center-flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.start-top-flex {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.center-column-top-flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.start-column-center-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.start-column-bottom-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.center-row-flex {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.start-row-bottom-flex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.start-row-center-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.space-between-column-center-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.space-between-row-center-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.space-between-row-bottom-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.space-between-row-top-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.space-between-column-start-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.space-around-column-start-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
