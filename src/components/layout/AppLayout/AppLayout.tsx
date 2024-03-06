@@ -13,7 +13,7 @@ export const AppLayout = () => {
         <div className="layout-wrapper center-column-top-flex">
             <AppHeader/>
             <div className="layout-content-sider-container center-row-flex">
-                {!isDesktop && <AppSider/>}
+                {isDesktop && <AppSider/>}
                 <AppContent/>
             </div>
             <AppFooter/>
