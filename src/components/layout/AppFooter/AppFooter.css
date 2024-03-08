@@ -1,0 +1,21 @@
+@import "../../../assets/styles/variables.css";
+
+.footer-container {
+    width: var(--desktop-content-container-width);
+    height: 150px;
+    background: black;
+}
+
+
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
+    .footer-container {
+        width: var(--tablet-content-container-width);
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .footer-container {
+        width: 100%;
+    }
+}

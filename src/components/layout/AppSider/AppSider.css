@@ -1,0 +1,12 @@
+.sider-container {
+    display: block;
+    height: 100%;
+    width: 20%;
+    background: gray;
+}
+
+@media screen and (max-width: 1300px) {
+    .sider-container {
+        display: none;
+    }
+}
