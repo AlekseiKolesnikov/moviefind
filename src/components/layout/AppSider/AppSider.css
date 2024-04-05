@@ -1,12 +1,15 @@
-.sider-container {
-    display: block;
+@import "../../../assets/styles/variables.css";
+
+.sider {
+    font: var(--main-text-bold);
     height: 100%;
-    width: 20%;
-    background: gray;
+    width: 15%;
+    background: var(--secondary-background-color);
+    border-right: var(--body-color) solid 2px;
 }
 
 @media screen and (max-width: 1300px) {
-    .sider-container {
+    .sider {
         display: none;
     }
 }
