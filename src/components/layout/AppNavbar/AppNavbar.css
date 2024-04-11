@@ -1,0 +1,37 @@
+.navbar__options-container {
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 20px;
+    gap: 12px;
+}
+
+.navbar__option {
+    gap: 5px;
+}
+
+.navbar__option {
+    cursor: pointer;
+}
+
+.navbar__option-icon {
+    height: 28px;
+}
+
+.navbar__option-text {
+}
+
+.whiteBackground {
+    color: #949494;
+}
+
+.whiteBackground:hover {
+    color: white;
+}
+
+.blackBackground {
+    color: var(--unhoovered-color);
+}
+
+.blackBackground:hover {
+    color: black;
+}

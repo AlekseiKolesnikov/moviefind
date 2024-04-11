@@ -7,7 +7,7 @@
 
 .layout-content-sider-container {
     width: var(--desktop-content-container-width);
-    height: calc(100vh - 230px);
+    height: var(--content-height);
 }
 
 @media screen and (min-width: 1000px) and (max-width: 1300px) {

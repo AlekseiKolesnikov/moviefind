@@ -3,7 +3,7 @@
 .footer-container {
     width: var(--desktop-content-container-width);
     height: 150px;
-    background: black;
+    background: var(--bacground-color);
 }
 
 

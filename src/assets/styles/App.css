@@ -21,13 +21,13 @@ body {
 body {
     overflow: hidden;
     z-index: 0;
-    background: #f4f4f4;
+    background: var(--body-color);
     font: var(--main-text);
 }
 
 @media screen and (max-width: 450px) {
     body {
-        background-color: white;
+        background-color: var(--secondary-background-color);
     }
 }
 
