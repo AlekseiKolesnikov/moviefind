@@ -6,6 +6,10 @@
     --text-color: #000;
     --accent-color: #ff5500;
     --unhoovered-color: #636363;
+    --header-height: 60px;
+    --content-height: calc(100vh - 210px);
+    --navbar-width: 170px;
+    --hoovered-gray-color: #191919;
 }
 /*-------SIZES---------------------------------------------------*/
 :root {
