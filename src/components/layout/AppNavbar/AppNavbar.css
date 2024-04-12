@@ -7,9 +7,6 @@
 
 .navbar__option {
     gap: 5px;
-}
-
-.navbar__option {
     cursor: pointer;
 }
 
@@ -34,4 +31,16 @@
 
 .blackBackground:hover {
     color: black;
+}
+
+.selected_black{
+    color: black;
+}
+
+.selected_white{
+    color: white;
+}
+
+.selected_border_outline {
+    border-bottom: var(--accent-color) 2px solid;
 }
