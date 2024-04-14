@@ -1,37 +1,37 @@
 import { create } from "zustand";
 
 type NavbarOption = {
-    index: number,
+    pathName: string,
     isSelected: boolean,
 }
 
 type NavbarOptionState = {
     navbarOptions: NavbarOption[],
-    setNavbarOption: (index: number) => void
+    setNavbarOption: (pathName: string) => void
 }
 
 export const useNavbarOption = create<NavbarOptionState>((set) => ({
     navbarOptions: [
         {
-            index: 0,
-            isSelected: true
-        },
-        {
-            index: 1,
+            pathName: "/",
             isSelected: false
         },
         {
-            index: 2,
+            pathName: "/movies",
             isSelected: false
         },
         {
-            index: 3,
+            pathName: "/tv_shows",
+            isSelected: false
+        },
+        {
+            pathName: "/people",
             isSelected: false
         }
     ],
-    setNavbarOption: (index) => set((state) => ({
+    setNavbarOption: (pathName) => set((state) => ({
         navbarOptions: state.navbarOptions.map((option) => {
-            if (option.index === index) {
+            if (option.pathName === pathName) {
                 option.isSelected = true;
                 return { ...option };
             } else {

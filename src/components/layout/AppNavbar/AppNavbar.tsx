@@ -12,29 +12,29 @@ import { useNavbarOption } from "../../../states/navbarOptionState.ts";
 interface INavbarSvgIcons {
     icon: ReactElement,
     text: string,
-    pageRoute: string
+    pagePathName: string
 }
 
 const navbarSvgIcons: INavbarSvgIcons[] = [
     {
         icon: <HomeIcon/>,
         text: "Main",
-        pageRoute: "/"
+        pagePathName: "/"
     },
     {
         icon: <CameraIcon/>,
         text: "Movies",
-        pageRoute: "/movies"
+        pagePathName: "/movies"
     },
     {
         icon: <ChairIcon/>,
         text: "TV Shows",
-        pageRoute: "/tv_shows"
+        pagePathName: "/tv_shows"
     },
     {
         icon: <PeopleIcon/>,
         text: "People",
-        pageRoute: "/people"
+        pagePathName: "/people"
     }
 ]
 
@@ -43,31 +43,34 @@ export const AppNavbar = () => {
         "blackBackground" : "whiteBackground"
     const updateNavbarOptionState = useNavbarOption((state) => state.setNavbarOption)
     const getNavbarOptionState = useNavbarOption((state) => state.navbarOptions)
+    const windowPathName = window.location.pathname
 
     useEffect(() => {
-        const windowPathName = window.location.pathname
-        const navbarOptionIndex = navbarSvgIcons.findIndex((icon) => icon.pageRoute === windowPathName)
-        updateNavbarOptionState(navbarOptionIndex)
-    }, [])
+        const navbarOptionIndex = navbarSvgIcons.findIndex((icon) => icon.pagePathName === windowPathName);
+        const selectedPathName = navbarSvgIcons[navbarOptionIndex]?.pagePathName;
+        updateNavbarOptionState(selectedPathName);
+    }, [updateNavbarOptionState, windowPathName])
 
     return (
         <nav className="navbar__options-container space-between-column-start-flex">
-            {navbarSvgIcons.map((iconData, index) => (
+            {navbarSvgIcons.map((navbarOption) => (
                 <Link
-                    key={iconData.text}
+                    key={navbarOption.text}
                     onClick={() => {
-                        updateNavbarOptionState(index)
+                        updateNavbarOptionState(navbarOption.pagePathName)
                     }}
                     className={navbarOptionClassName +
-                        ` navbar__option start-row-center-flex ${getNavbarOptionState[index].isSelected ?
+                        ` navbar__option start-row-center-flex 
+                        ${getNavbarOptionState[getNavbarOptionState.findIndex((option) => option.pathName === navbarOption.pagePathName)].isSelected ?
                             useWindowSize.getState().isDesktopScreen ?
                                 "selected_black" : "selected_white" : ""}`}
-                    to={iconData.pageRoute}>
+                    to={navbarOption.pagePathName}>
                     <div
                         className={`navbar__option-icon center-flex 
-                            ${getNavbarOptionState[index].isSelected ? "selected_border_outline" : ""}`}
-                    >{iconData.icon}</div>
-                    <p className="navbar__option-text">{iconData.text}</p>
+                            ${getNavbarOptionState[getNavbarOptionState.findIndex((option) => option.pathName === navbarOption.pagePathName)].isSelected ? 
+                            "selected_border_outline" : ""}`}
+                    >{navbarOption.icon}</div>
+                    <p className="navbar__option-text">{navbarOption.text}</p>
                 </Link>
             ))}
         </nav>
