@@ -1,0 +1,19 @@
+.category-options__option {
+    height: 35px;
+    width: fit-content;
+    padding: 0 15px;
+    margin-right: 25px;
+    color: var(--unhoovered-color);
+    font: var(--main-text-bold);
+    border-radius: 7px;
+}
+
+.category-options__option:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.category-option-selected {
+    background: var(--hoovered-light-gray-color);
+    color: black;
+}

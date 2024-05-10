@@ -5,14 +5,14 @@ import { AppSider } from "../AppSider/AppSider.tsx";
 import { AppContent } from "../AppContent/AppContent.tsx";
 import { AppFooter } from "../AppFooter/AppFooter.tsx";
 
-export const AppLayout = () => {
+export const AppLayout = ({isSiderLayout}: {isSiderLayout: boolean}) => {
 
     return (
         <div className="layout-wrapper center-column-top-flex">
             <AppHeader/>
             <div className="layout-content-sider-container center-row-flex">
-                <AppSider/>
-                <AppContent/>
+                {isSiderLayout && <AppSider/>}
+                <AppContent isFullScreenContent={isSiderLayout}/>
             </div>
             <AppFooter/>
         </div>

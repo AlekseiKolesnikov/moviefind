@@ -1,0 +1,18 @@
+.category-options__container {
+    width: 100%;
+    height: fit-content;
+}
+
+hr.solid {
+    border-top: 1px solid var(--hoovered-light-gray-color);
+    padding-bottom: 15px;
+}
+
+.category-options__label {
+    font: var(--main-text-bigger-bolder);
+    padding-bottom: 5px;
+}
+
+.category-options__list-container {
+
+}
