@@ -14,7 +14,6 @@ export const CategoryOption = ({ optionLabel, optionIsSelected }: IOption) => {
         <div
             onClick={() => {
                 updateCategoryOption(optionLabel)
-                console.log(optionIsSelected)
             }}
             className={`category-options__option center-flex ${optionIsSelected ? 'category-option-selected' : ''}`}
         >

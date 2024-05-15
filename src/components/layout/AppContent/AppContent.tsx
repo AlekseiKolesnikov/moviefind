@@ -8,8 +8,6 @@ interface IAppContentProps {
     isFullScreenContent: boolean
 }
 
-
-
 export const AppContent = ({isFullScreenContent}: IAppContentProps) => {
     const windowPathName = window.location.pathname
 
@@ -17,9 +15,13 @@ export const AppContent = ({isFullScreenContent}: IAppContentProps) => {
     return (
         <div className={`content-container ${isFullScreenContent ? "notFullScreenWidth" : "fullScreenWidth"}`}>
             <div>
-                {windowPathName != '/' && <AppCategoryOptions/>}
+                {windowPathName !== '/' &&
+                    <>
+                        <AppCategoryOptions/>
+                        <CategoryOptionDataContainer/>
+                    </>
+                }
             </div>
-            <CategoryOptionDataContainer/>
         </div>
     )
 }

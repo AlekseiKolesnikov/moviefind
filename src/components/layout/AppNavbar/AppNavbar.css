@@ -14,9 +14,6 @@
     height: 28px;
 }
 
-.navbar__option-text {
-}
-
 .whiteBackground {
     color: #949494;
 }
@@ -33,11 +30,11 @@
     color: black;
 }
 
-.selected_black{
+.selected_black {
     color: black;
 }
 
-.selected_white{
+.selected_white {
     color: white;
 }
 
