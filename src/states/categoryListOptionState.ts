@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { CategoryOption } from "../components/common/CategoryOption/CategoryOption.tsx";
 
 type CategoryOption = {
     label: string,

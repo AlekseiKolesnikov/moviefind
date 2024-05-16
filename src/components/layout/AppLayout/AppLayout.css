@@ -21,3 +21,9 @@
         max-width: 100%;
     }
 }
+
+@media screen and (max-width: 450px) {
+    .layout-content-sider-container {
+        max-width: 100%;
+    }
+}

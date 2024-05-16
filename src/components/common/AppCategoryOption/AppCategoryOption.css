@@ -1,0 +1,10 @@
+.app-category-option__container {
+    width: 100%;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 450px) {
+    .app-category-option__container {
+        padding-top: 40px;
+    }
+}

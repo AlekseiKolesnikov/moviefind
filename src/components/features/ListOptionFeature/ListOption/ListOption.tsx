@@ -1,5 +1,5 @@
-import './CategoryOption.css'
-import { useCategoryOption } from "../../../states/categoryListOptionState.ts";
+import './ListOption.css'
+import { useCategoryOption } from "../../../../states/categoryListOptionState.ts";
 
 interface IOption {
     optionLabel: string
@@ -7,7 +7,7 @@ interface IOption {
 }
 
 
-export const CategoryOption = ({ optionLabel, optionIsSelected }: IOption) => {
+export const ListOption = ({ optionLabel, optionIsSelected }: IOption) => {
     const updateCategoryOption = useCategoryOption((state) => state.setCategoryOption)
 
     return (

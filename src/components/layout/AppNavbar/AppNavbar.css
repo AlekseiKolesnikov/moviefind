@@ -18,6 +18,16 @@
     color: #949494;
 }
 
+.navbar__option-text {
+    font: var(--main-text-bold);
+}
+
+@media screen and (max-width: 450px) {
+    .navbar__option-text {
+        font: var(--main-text-bold);
+    }
+}
+
 .whiteBackground:hover {
     color: white;
 }

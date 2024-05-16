@@ -8,6 +8,15 @@
     border-radius: 7px;
 }
 
+@media screen and (max-width: 450px) {
+    .category-options__option {
+        height: 30px;
+        margin-right: 15px;
+        padding: 0 10px;
+        font: var(--main-text-bold-mobile);
+    }
+}
+
 .category-options__option:hover {
     cursor: pointer;
     color: black;

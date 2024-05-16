@@ -1,24 +1,19 @@
 import './AppContent.css'
-import { AppCategoryOptions } from "../../common/AppCategoryOptions/AppCategoryOptions.tsx";
-import {
-    CategoryOptionDataContainer
-} from "../../features/CategoryOptionDataContainer/CategoryOptionDataContainer.tsx";
+import { ListOptionsContainer } from "../../features/ListOptionFeature/ListOptionsContainer/ListOptionsContainer.tsx";
+import { AppCategoryOption } from "../../common/AppCategoryOption/AppCategoryOption.tsx";
+import { useSideBarState } from "../../../states/sideBarState.ts";
 
-interface IAppContentProps {
-    isFullScreenContent: boolean
-}
-
-export const AppContent = ({isFullScreenContent}: IAppContentProps) => {
+export const AppContent = () => {
     const windowPathName = window.location.pathname
 
-
     return (
-        <div className={`content-container ${isFullScreenContent ? "notFullScreenWidth" : "fullScreenWidth"}`}>
+        <div
+            className={`content-container ${useSideBarState.getState().sideBarVisible ? "notFullScreenWidth" : "fullScreenWidth"}`}>
             <div>
                 {windowPathName !== '/' &&
                     <>
-                        <AppCategoryOptions/>
-                        <CategoryOptionDataContainer/>
+                        <ListOptionsContainer/>
+                        <AppCategoryOption/>
                     </>
                 }
             </div>

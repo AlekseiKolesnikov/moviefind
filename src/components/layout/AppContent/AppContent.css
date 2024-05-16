@@ -1,7 +1,7 @@
 .content-container {
     height: 100%;
     background: white;
-    padding: var(--content-padding);
+    padding: var(--big-screen-content-padding);
 }
 
 .fullScreenWidth {
@@ -12,10 +12,8 @@
     width: 85%;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 450px) {
     .content-container {
-        width: 100%;
-        height: 100%;
-        background: white;
+        padding: var(--mobile-screen-content-padding);
     }
 }
