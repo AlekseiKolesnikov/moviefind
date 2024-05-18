@@ -6,7 +6,6 @@ interface IOption {
     optionIsSelected: boolean
 }
 
-
 export const ListOption = ({ optionLabel, optionIsSelected }: IOption) => {
     const updateCategoryOption = useCategoryOption((state) => state.setCategoryOption)
 

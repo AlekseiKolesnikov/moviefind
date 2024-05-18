@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useNavbarOption } from "../../../states/navbarOptionState.ts";
 import { useSideBarState } from "../../../states/sideBarState.ts";
 import { usePathNameState } from "../../../states/pathNameState.ts";
+import classNames from "classnames";
 
 interface INavbarSvgIcons {
     icon: ReactElement,
@@ -39,13 +40,20 @@ const navbarSvgIcons: INavbarSvgIcons[] = [
     }
 ]
 
+const blackBackground = classNames(' blackBackground')
+const whiteBackground = classNames(' whiteBackground')
+const navbarOptionClassName = classNames(' navbar__option')
+const startRowCenterFlexClassName = classNames(' start-row-center-flex')
+const selectedBlackClassName = classNames(' selected_black')
+const selectedWhiteClassName = classNames(' selected_white')
+
 export const AppNavbar = () => {
     const [isSideBarWhite, setSideBarWhite] = useState(useSideBarState.getState().sideBarVisible)
     const updateSideBarState = useSideBarState((state) => state.setSideBarState)
     const updateNavbarOptionState = useNavbarOption((state) => state.setNavbarOption)
     const getNavbarOptionState = useNavbarOption((state) => state.navbarOptions)
     const windowPathName = window.location.pathname
-    const navbarOptionClassName = isSideBarWhite ? " blackBackground" : " whiteBackground"
+    const fontColorClassNames =  isSideBarWhite ? blackBackground : whiteBackground
 
     useEffect(() => {
         const navbarOptionIndex = navbarSvgIcons.findIndex((icon) => icon.pagePathName === windowPathName);
@@ -74,8 +82,7 @@ export const AppNavbar = () => {
                         onClick={() => {
                             updateNavbarOptionState(navbarOption.pagePathName)
                         }}
-                        className={navbarOptionClassName +
-                            ` navbar__option start-row-center-flex ${isSelected ? isSideBarWhite ? " selected_black" : " selected_white" : ""}`}
+                        className={navbarOptionClassName + fontColorClassNames + startRowCenterFlexClassName + ` ${isSelected ? isSideBarWhite ? selectedBlackClassName : selectedWhiteClassName : ""}`}
                         to={navbarOption.pagePathName}>
                         <div
                             className={`navbar__option-icon center-flex 

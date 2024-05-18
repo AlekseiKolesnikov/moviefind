@@ -27,7 +27,7 @@ export const useNavbarOption = create<NavbarOptionState>((set) => ({
         {
             pathName: "/people",
             isSelected: false
-        }
+        },
     ],
     setNavbarOption: (pathName) => set((state) => ({
         navbarOptions: state.navbarOptions.map((option) => {

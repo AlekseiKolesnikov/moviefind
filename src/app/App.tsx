@@ -4,40 +4,21 @@ import { MoviesPage } from "../pages/MoviesPage/MoviesPage.tsx";
 import { TvShowsPage } from "../pages/TvShowsPage/TvShowsPage.tsx";
 import { PeoplePage } from "../pages/PeoplePage/PeoplePage.tsx";
 import { MainPage } from "../pages/MainPage/MainPage.tsx";
-import { ReactElement } from "react";
 
-interface IRoutes {
-    path: string,
-    element: ReactElement
-}
-
-const ROUTES: IRoutes[] = [
-    {
-        path: "/",
-        element: <MainPage/>
-    },
-    {
-        path: "/movies",
-        element: <MoviesPage/>
-    },
-    {
-        path: "/tv_shows",
-        element: <TvShowsPage/>
-    },
-    {
-        path: "/people",
-        element: <PeoplePage/>
-    }
-]
+export const MAIN_PAGE = "/"
+export const MOVIES_PAGE = "/movies"
+export const TV_SHOWS_PAGE = "/tv_shows"
+export const PEOPLE_PAGE = "/people"
 
 function App() {
 
     return (
         <>
             <Routes>
-                {ROUTES.map((route) => (
-                    <Route key={route.path} path={route.path} element={route.element}/>
-                ))}
+                <Route path={MAIN_PAGE} element={<MainPage/>}/>
+                <Route path={MOVIES_PAGE} element={<MoviesPage/>}/>
+                <Route path={TV_SHOWS_PAGE} element={<TvShowsPage/>}/>
+                <Route path={PEOPLE_PAGE} element={<PeoplePage/>}/>
             </Routes>
         </>
     )

@@ -53,7 +53,7 @@ export const AppHeader = () => {
                 <div
                     className={isDropDownMenuVisible && !isMobileSideBar ?
                         "header__drop-down-menu-container center-column-top-flex menu-is-hovered gray-background" :
-                        "header__drop-down-menu-container center-column-top-flex black-background"
+                        "header__drop-down-menu-container center-column-top-flex"
                     }
                     onMouseOver={() => {
                         if (!isSideBarWhite) {
@@ -68,7 +68,7 @@ export const AppHeader = () => {
                 >
                     <div className="header__logo-container space-between-row-center-flex">
                         <div
-                            className={`header__menu-icon ${isSideBarWhite ? ' header__menu-icon-hidden' : ' header__menu-icon-visible'}`}
+                            className={`header__menu-icon ${isSideBarWhite ? 'header__menu-icon-hidden' : 'header__menu-icon-visible'}`}
                             onClick={() => {
                                 if (isMobileSideBar) {
                                     setIsDropDownMenuVisible(true)
@@ -120,7 +120,7 @@ export const AppHeader = () => {
                     {isMobileSideBar &&
                         <aside
                             ref={sideBarRef}
-                            className={`sidebar ${isDropDownMenuVisible ? ' visible' : ''}`}
+                            className={`sidebar ${isDropDownMenuVisible ? 'visible' : ''}`}
                         >
                             <div className="header__slide-out-menu__header center-flex-end">
                                 <div

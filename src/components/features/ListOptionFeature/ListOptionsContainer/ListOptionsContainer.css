@@ -15,14 +15,17 @@ hr.solid {
 }
 
 @media screen and (max-width: 450px) {
+    .category-options__container {
+        width: 100vw;
+    }
+
     .category-options__label {
         font: var(--main-text-bolder-mobile);
     }
 
     .category-options__list-container {
-        position: absolute;
         width: 100%;
-        overflow-x: scroll;
+        overflow-x: auto;
         margin-left: -20px;
         padding-left: 20px;
     }
