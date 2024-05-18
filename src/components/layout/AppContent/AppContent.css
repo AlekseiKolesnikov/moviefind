@@ -2,6 +2,7 @@
     height: 100%;
     background: white;
     padding: var(--big-screen-content-padding);
+    overflow: hidden;
 }
 
 .fullScreenWidth {
