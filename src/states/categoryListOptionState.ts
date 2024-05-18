@@ -27,18 +27,6 @@ export const useCategoryOption = create<CategoryOptionState>((set) => ({
         {
             label: 'Ranking',
             isSelected: false
-        },
-        {
-            label: 'Ranking',
-            isSelected: false
-        },
-        {
-            label: 'Ranking',
-            isSelected: false
-        },
-        {
-            label: 'Ranking',
-            isSelected: false
         }
     ],
     setCategoryOption: (label) => set((state) => {
