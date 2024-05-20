@@ -2,23 +2,26 @@ import './VideoTrailerFeature.css'
 import '../../../assets/styles/flex-patterns.css'
 import { useEffect, useRef, useState } from "react";
 import { useHandelResize } from "../../../hooks/useHandelResize.ts";
+import { videoTrailerErrorHandle } from "../../../services /video-trailer-error-handle.ts";
 
 export const VideoTrailerFeature = () => {
+    const [videoUrl, setVideoUrl] = useState('')
     const [videoTrailerContainerSize, setVideoTrailerContainerSize] = useState(0)
     const handleResize = useHandelResize()
     const videoTrailerElement = useRef<HTMLVideoElement>(null)
 
     useEffect(() => {
         const videoElement = videoTrailerElement.current
-
         const handleLoadedMetadata = () => {
             if (videoTrailerElement.current) {
                 setVideoTrailerContainerSize(videoTrailerElement.current.offsetHeight)
             }
+            videoTrailerErrorHandle().then(value => setVideoUrl(value))
         }
         if (videoTrailerElement.current) {
             setVideoTrailerContainerSize(videoTrailerElement.current.offsetHeight)
         }
+
         if (videoElement) {
             videoElement.addEventListener('loadedmetadata', handleLoadedMetadata)
         }
@@ -73,9 +76,13 @@ export const VideoTrailerFeature = () => {
                 </button>
             </div>
             <video className="video-trailer__video"
+                   id="video_trailer"
                    ref={videoTrailerElement}
-                   src="../../../../src/assets/videos/video_trailer.mov"
-                   autoPlay={true} loop={true} muted={true}>
+                   controls={false}
+                   autoPlay={true} loop={true} muted={true}
+                   poster={videoUrl}
+            >
+                <source type="video/mp4" src="https://od.lk/s/MTNfMjQ0NDc1MDdf/video_trailer.mp4" id="video_trailer"/>
             </video>
         </div>
     )
