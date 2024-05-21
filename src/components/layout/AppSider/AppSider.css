@@ -1,7 +1,6 @@
 @import "../../../assets/styles/variables.css";
 
 .sider {
-    font: var(--main-text-bold);
     height: 100%;
     width: 15%;
     background: var(--secondary-background-color);
@@ -11,5 +10,11 @@
 @media screen and (max-width: 1300px) {
     .sider {
         display: none;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .sider {
+        padding-top: var(--mobile-screen-content-padding);
     }
 }

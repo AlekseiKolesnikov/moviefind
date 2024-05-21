@@ -16,6 +16,7 @@ body {
     -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
+    z-index: var(--base-z-index);
 }
 
 body {

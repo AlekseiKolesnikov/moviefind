@@ -5,6 +5,7 @@
     --bacground-color: #141414;
     --text-color: #000;
     --accent-color: #ff5500;
+    --secondary-accent-color: #ffae00;
     --unhoovered-color: #636363;
     --header-height: 60px;
     --content-height: calc(100vh - 210px);
@@ -17,7 +18,7 @@
     --desktop-content-container-width: 1300px;
     --tablet-content-container-width: 1000px;
     --mobile-content-container-width: 450px;
-    --big-screen-content-padding: 40px;
+    --big-screen-content-padding: 30px;
     --mobile-screen-content-padding: 20px;
 }
 
@@ -41,4 +42,12 @@
     --main-text-bigger-bolder-mobile: 800 13px/1.2 'Be Vietnam Pro', sans-serif;
     --subscript-text-bold-mobile: 800 8px/1 'Be Vietnam Pro', sans-serif;
     --subscript-text-mobile: 400 8px/1 'Be Vietnam Pro', sans-serif;
+}
+
+/*-------Z-INDEX-----------------------------------------------------*/
+:root {
+    --base-z-index: 0;
+    --middle-z-index: 1;
+    --high-z-index: 2;
+    --overlay-z-index: 10;
 }

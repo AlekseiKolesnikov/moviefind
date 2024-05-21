@@ -18,3 +18,8 @@
         padding: var(--mobile-screen-content-padding);
     }
 }
+
+.list-option-pages {
+    width: 100%;
+    height: auto;
+}

@@ -1,16 +1,12 @@
 import './AppHeader.css'
 import '../../../assets/styles/flex-patterns.css'
 import { useEffect, useRef, useState } from "react";
-import { useWindowSize } from "../../../states/windowSizeState.ts";
 import { AppNavbar } from "../AppNavbar/AppNavbar.tsx";
 import { useSideBarState } from "../../../states/sideBarState.ts";
-import { usePathNameState } from "../../../states/pathNameState.ts";
+import { useHandelResize } from "../../../hooks/useHandelResize.ts";
 
 export const AppHeader = () => {
-    const [isMobileSideBar, setMobileSideBar] = useState(useSideBarState.getState().sideBarSlideOutSide)
-    const [isSideBarWhite, setSideBarWhite] = useState(useSideBarState.getState().sideBarVisible)
-    const setWindowSize = useWindowSize((state) => state.setWindowSize);
-    const updateSideBarState = useSideBarState((state) => state.setSideBarState)
+    const handleResizeStates = useHandelResize()
     const [isDropDownMenuVisible, setIsDropDownMenuVisible] = useState(false);
     const sideBarRef = useRef<HTMLElement | null>(null);
 
@@ -35,42 +31,30 @@ export const AppHeader = () => {
         }
     });
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowSize(window.innerWidth);
-            updateSideBarState(usePathNameState.getState().pathName)
-            setSideBarWhite(useSideBarState.getState().sideBarVisible)
-            setMobileSideBar(useSideBarState.getState().sideBarSlideOutSide)
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [setWindowSize, updateSideBarState]);
-
     return (
         <header className="header center-flex">
             <div className="header__container space-between-row-center-flex">
                 <div
-                    className={isDropDownMenuVisible && !isMobileSideBar ?
+                    className={isDropDownMenuVisible && !handleResizeStates.isMobileSideBar ?
                         "header__drop-down-menu-container center-column-top-flex menu-is-hovered gray-background" :
                         "header__drop-down-menu-container center-column-top-flex"
                     }
                     onMouseOver={() => {
-                        if (!isSideBarWhite) {
+                        if (!handleResizeStates.isSideBarWhite) {
                             setIsDropDownMenuVisible(true)
                         }
                     }}
                     onMouseOut={() => {
-                        if (!isSideBarWhite) {
+                        if (!handleResizeStates.isSideBarWhite) {
                             setIsDropDownMenuVisible(false)
                         }
                     }}
                 >
                     <div className="header__logo-container space-between-row-center-flex">
                         <div
-                            className={`header__menu-icon ${isSideBarWhite ? 'header__menu-icon-hidden' : 'header__menu-icon-visible'}`}
+                            className={`header__menu-icon ${handleResizeStates.isSideBarWhite ? 'header__menu-icon-hidden' : 'header__menu-icon-visible'}`}
                             onClick={() => {
-                                if (isMobileSideBar) {
+                                if (handleResizeStates.isMobileSideBar) {
                                     setIsDropDownMenuVisible(true)
                                 }
                             }}
@@ -99,16 +83,16 @@ export const AppHeader = () => {
                         </div>
                     </div>
 
-                    {isDropDownMenuVisible && !isMobileSideBar &&
+                    {isDropDownMenuVisible && !handleResizeStates.isMobileSideBar &&
                         <div
                             className="header__pop-up-menu-container"
                             onMouseOver={() => {
-                                if (!isMobileSideBar) {
+                                if (!handleResizeStates.isMobileSideBar) {
                                     setIsDropDownMenuVisible(true)
                                 }
                             }}
                             onMouseOut={() => {
-                                if (!isMobileSideBar) {
+                                if (!handleResizeStates.isMobileSideBar) {
                                     setIsDropDownMenuVisible(false)
                                 }
                             }}
@@ -117,7 +101,7 @@ export const AppHeader = () => {
                         </div>
                     }
 
-                    {isMobileSideBar &&
+                    {handleResizeStates.isMobileSideBar &&
                         <aside
                             ref={sideBarRef}
                             className={`sidebar ${isDropDownMenuVisible ? 'visible' : ''}`}
@@ -126,7 +110,7 @@ export const AppHeader = () => {
                                 <div
                                     className="header__cross-icon"
                                     onClick={() => {
-                                        if (isMobileSideBar) {
+                                        if (handleResizeStates.isMobileSideBar) {
                                             setIsDropDownMenuVisible(false)
                                         }
                                     }}
