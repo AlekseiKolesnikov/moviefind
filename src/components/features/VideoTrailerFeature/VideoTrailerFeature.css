@@ -1,11 +1,11 @@
 .video-trailer__container {
     width: 100%;
-    height: fit-content;
+    height: auto;
 }
 
 .video-trailer__video {
     width: 100%;
-    height: fit-content;
+    height: auto;
 }
 
 .video-trailer__movie_inf_container {
@@ -21,6 +21,7 @@
     rgba(0, 0, 0, 1.0) 60%
     );
     width: 50%;
+    height: auto;
 
     p {
         position: relative;
@@ -38,7 +39,7 @@
 .video-trailer__dune-logo {
     position: relative;
     width: 40%;
-    height: fit-content;
+    height: auto;
 }
 
 
