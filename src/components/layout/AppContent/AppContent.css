@@ -1,8 +1,9 @@
 .content-container {
-    height: 100%;
+    flex-grow: 1;
     background: white;
-    padding: var(--big-screen-content-padding);
+    padding: var(--big-screen-content-top-bottom-padding) var(--big-screen-content-side-padding);
     overflow: hidden;
+    height: fit-content;
 }
 
 .fullScreenWidth {
@@ -20,6 +21,11 @@
 }
 
 .list-option-pages {
+    width: 100%;
+    height: auto;
+}
+
+.content-container__movie-series-content {
     width: 100%;
     height: auto;
 }

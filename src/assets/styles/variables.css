@@ -9,6 +9,7 @@
     --unhoovered-color: #636363;
     --header-height: 60px;
     --content-height: calc(100vh - 210px);
+    --no-header-content-height: calc(100vh - 60px);
     --navbar-width: 170px;
     --hoovered-gray-color: #191919;
     --hoovered-light-gray-color: #F1F1F1;
@@ -16,9 +17,10 @@
 /*-------SIZES---------------------------------------------------*/
 :root {
     --desktop-content-container-width: 1300px;
-    --tablet-content-container-width: 1000px;
+    --tablet-content-container-width: 1105px;
     --mobile-content-container-width: 450px;
-    --big-screen-content-padding: 30px;
+    --big-screen-content-top-bottom-padding: 30px;
+    --big-screen-content-side-padding: 50px;
     --mobile-screen-content-padding: 20px;
 }
 

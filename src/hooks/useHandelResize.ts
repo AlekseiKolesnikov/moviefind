@@ -15,7 +15,7 @@ export const useHandelResize = (): IUseHandelResize => {
     const setWindowSize = useWindowSize((state) => state.setWindowSize);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
     const [isMobileSideBar, setMobileSideBar] = useState(useSideBarState.getState().sideBarSlideOutSide)
-    const [isSideBarWhite, setSideBarWhite] = useState(useSideBarState.getState().sideBarVisible)
+    const [isSideBarVisible, setSideBarSate] = useState(useSideBarState.getState().sideBarVisible)
 
     useEffect(() => {
         const handleResize = () => {
@@ -23,7 +23,7 @@ export const useHandelResize = (): IUseHandelResize => {
             setWindowSize(window.innerWidth);
             updateSideBarState(usePathNameState.getState().pathName)
             setScreenWidth(window.innerWidth)
-            setSideBarWhite(useSideBarState.getState().sideBarVisible)
+            setSideBarSate(useSideBarState.getState().sideBarVisible)
             setMobileSideBar(useSideBarState.getState().sideBarSlideOutSide)
         }
         handleResize();
@@ -33,7 +33,7 @@ export const useHandelResize = (): IUseHandelResize => {
 
     return {
         isMobileSideBar: isMobileSideBar,
-        isSideBarWhite: isSideBarWhite,
+        isSideBarWhite: isSideBarVisible,
         screenWidth: screenWidth
     }
 }
