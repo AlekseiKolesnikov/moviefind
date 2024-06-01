@@ -7,6 +7,7 @@
     --accent-color: #ff5500;
     --secondary-accent-color: #ffae00;
     --unhoovered-color: #636363;
+    --ranking-slide-background: #3bb33b;
     --header-height: 60px;
     --content-height: calc(100vh - 210px);
     --no-header-content-height: calc(100vh - 60px);
@@ -20,8 +21,9 @@
     --tablet-content-container-width: 1105px;
     --mobile-content-container-width: 450px;
     --big-screen-content-top-bottom-padding: 30px;
-    --big-screen-content-side-padding: 50px;
-    --mobile-screen-content-padding: 20px;
+    --desktop-screen-content-side-padding: 45px;
+    --tablet-screen-content-side-padding: 35px;
+    --mobile-screen-content-padding: 25px;
 }
 
 /*--------FONTS----------------------------------------------------*/
@@ -29,9 +31,12 @@
     --heading-text: 800 30px/1.4 'Be Vietnam Pro', sans-serif;
     --subheading-text-bigger: 800 22px/1.4 'Be Vietnam Pro', sans-serif;
     --subheading-text: 800 19px/1.4 'Be Vietnam Pro', sans-serif;
+    --subheading-text-thiner: 600 19px/1.4 'Be Vietnam Pro', sans-serif;
     --main-text: 400 14px/1.2 'Be Vietnam Pro', sans-serif;
     --main-text-bold: 600 14px/1.2 'Be Vietnam Pro', sans-serif;
     --main-text-bigger-bolder: 800 16px/1.2 'Be Vietnam Pro', sans-serif;
+    --subscript-text-bigger-bold: 600 12px/1 'Be Vietnam Pro', sans-serif;
+    --subscript-text-bigger: 400 12px/1 'Be Vietnam Pro', sans-serif;
     --subscript-text-bold: 800 10px/1 'Be Vietnam Pro', sans-serif;
     --subscript-text: 400 10px/1 'Be Vietnam Pro', sans-serif;
 

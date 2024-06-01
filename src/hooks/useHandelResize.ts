@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useSideBarState } from "../states/sideBarState.ts";
-import { usePathNameState } from "../states/pathNameState.ts";
-import { useWindowSize } from "../states/windowSizeState.ts";
+import { useSideBar } from "../states/useSideBar.ts";
+import { usePathName } from "../states/usePathName.ts";
+import { useWindowSize } from "../states/useWindowSize.ts";
 
 interface IUseHandelResize {
     isMobileSideBar: boolean,
@@ -10,21 +10,21 @@ interface IUseHandelResize {
 }
 
 export const useHandelResize = (): IUseHandelResize => {
-    const updatePathNameState = usePathNameState((state) => state.setPathName)
-    const updateSideBarState = useSideBarState((state) => state.setSideBarState)
+    const updatePathNameState = usePathName((state) => state.setPathName)
+    const updateSideBarState = useSideBar((state) => state.setSideBarState)
     const setWindowSize = useWindowSize((state) => state.setWindowSize);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-    const [isMobileSideBar, setMobileSideBar] = useState(useSideBarState.getState().sideBarSlideOutSide)
-    const [isSideBarVisible, setSideBarSate] = useState(useSideBarState.getState().sideBarVisible)
+    const [isMobileSideBar, setMobileSideBar] = useState(useSideBar.getState().sideBarSlideOutSide)
+    const [isSideBarVisible, setSideBarSate] = useState(useSideBar.getState().sideBarVisible)
 
     useEffect(() => {
         const handleResize = () => {
             updatePathNameState(location.pathname)
             setWindowSize(window.innerWidth);
-            updateSideBarState(usePathNameState.getState().pathName)
+            updateSideBarState(usePathName.getState().pathName)
             setScreenWidth(window.innerWidth)
-            setSideBarSate(useSideBarState.getState().sideBarVisible)
-            setMobileSideBar(useSideBarState.getState().sideBarSlideOutSide)
+            setSideBarSate(useSideBar.getState().sideBarVisible)
+            setMobileSideBar(useSideBar.getState().sideBarSlideOutSide)
         }
         handleResize();
         window.addEventListener('resize', handleResize);

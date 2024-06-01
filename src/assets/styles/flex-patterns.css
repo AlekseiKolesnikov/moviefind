@@ -91,6 +91,13 @@
     justify-content: flex-start;
 }
 
+.start-row-top-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
 .space-between-column-center-flex {
     display: flex;
     flex-direction: column;

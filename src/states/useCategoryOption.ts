@@ -5,12 +5,12 @@ type CategoryOption = {
     isSelected: boolean
 }
 
-type CategoryOptionState = {
+type UseCategoryOption = {
     categoryOptions: CategoryOption[],
     setCategoryOption: (label: string) => void
 }
 
-export const useCategoryOption = create<CategoryOptionState>((set) => ({
+export const useCategoryOption = create<UseCategoryOption>((set) => ({
     categoryOptions: [
         {
             label: 'Genres',
