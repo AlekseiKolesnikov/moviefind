@@ -14,7 +14,9 @@ export const SliderGrid = ({ sliderId, label }: { sliderId: number, label: strin
                 slidesPerView={2}
                 grid={{
                     rows: 5,
+                    fill: 'row',
                 }}
+                spaceBetween={30}
                 freeMode={true}
                 cssMode={true}
                 mousewheel={true}

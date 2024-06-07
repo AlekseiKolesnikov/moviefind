@@ -1,6 +1,11 @@
+.swiper-slide {
+    overflow-y: hidden;
+}
+
 .small-swiper__container {
     width: 100%;
-    height: fit-content;
+    height: auto;
+    padding-bottom: 15px ;
 
     p {
         font: var(--subheading-text-thiner);
@@ -47,22 +52,33 @@
 .small-swiper__movie-label {
     font: var(--main-text-bold);
     text-align: left;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
+
+
 
 .small-swiper__year-genres-container {
     gap: 2px;
 }
 
 .small-swiper__movie-release-year {
-    font: var(--subscript-text-bigger);
-    text-align: left;
-    color: var(--unhoovered-color);
+    gap: 2px;
+    span {
+        font: var(--subscript-text-bigger);
+        text-align: left;
+        color: var(--unhoovered-color);
+        p {
+            width: fit-content;
+            font: var(--subscript-text-bigger);
+            color: var(--unhoovered-color);
+        }
+    }
+
 }
 
-.small-swiper__movie-genres {
-    p {
-        width: fit-content;
-        font: var(--subscript-text-bigger);
-        color: var(--unhoovered-color);
-    }
+.small-swiper__genres-container {
+    gap: 2px;
 }

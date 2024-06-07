@@ -20,20 +20,22 @@ export const SliderWithDescription = ({ sliderId, label }: { sliderId: number, l
                 breakpoints={{
                     750: {
                         slidesPerView: 6,
-                        slidesPerGroup: 6,
+                        spaceBetween: 20
+                    },
+                    650: {
+                        slidesPerView: 5,
                         spaceBetween: 20
                     },
                     600: {
-                        slidesPerView: 5,
-                        slidesPerGroup: 5,
-                        spaceBetween: 20
-                    },
-                    450: {
                         slidesPerView: 4.5,
                         spaceBetween: 20
                     },
-                    0: {
+                    450: {
                         slidesPerView: 3.5,
+                        spaceBetween: 20
+                    },
+                    0: {
+                        slidesPerView: 2.5,
                         spaceBetween: 20
                     }
                 }}
@@ -61,19 +63,9 @@ export const SliderWithDescription = ({ sliderId, label }: { sliderId: number, l
                             <div className="small-swiper__slide-inf-container start-column-top-flex">
                                 <div className="small-swiper__movie-label">{data.movieLabel}</div>
                                 <div className="small-swiper__year-genres-container start-row-top-flex">
-                                    <div className="small-swiper__movie-release-year">{data.releaseYear},</div>
-                                    <div className="small-swiper__movie-genres">
-                                        {data.genres.map((genre) => {
-                                                const genreIndex = useSliderResponse.getState().slideGenres.findIndex(value => value.id === genre)
-                                                return (
-                                                    <p
-                                                        key={genre}
-                                                    >
-                                                        {useSliderResponse.getState().slideGenres[genreIndex].name}
-                                                    </p>
-                                                )
-                                            }
-                                        )}
+                                    <div className="small-swiper__movie-release-year start-row-top-flex">
+                                        <span>{data.releaseYear}, </span>
+                                        <span className="small-swiper__genres-container">{data.genre}</span>
                                     </div>
                                 </div>
                             </div>

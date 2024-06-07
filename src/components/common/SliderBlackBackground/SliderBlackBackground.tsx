@@ -18,8 +18,7 @@ export const SliderBlackBackground = ({ sliderId, label }: { sliderId: number, l
                         spaceBetween: 20
                     },
                     600: {
-                        slidesPerView: 3,
-                        slidesPerGroup: 3,
+                        slidesPerView: 2.5,
                         spaceBetween: 20
                     },
                     450: {

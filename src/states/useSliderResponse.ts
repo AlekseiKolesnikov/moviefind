@@ -16,26 +16,37 @@ type Dates = {
     maximum: string;
     minimum: string;
 }
-type MovieResult = {
+
+interface MovieResponse {
+    original_title: string;
+    release_date: string;
+    title: string;
+    video: boolean;
+}
+
+interface SeriesResponse {
+    origin_country: string[],
+    original_name: string;
+    first_air_date: string;
+}
+
+interface SliderApiResponse extends MovieResponse, SeriesResponse {
     adult: boolean;
     backdrop_path: string;
     genre_ids: number[];
     id: number;
     original_language: string;
-    original_title: string;
     overview: string;
     popularity: number;
     poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
     vote_average: number;
     vote_count: number;
 }
+
 type ApiResponse = {
     dates: Dates;
     page: number;
-    results: MovieResult[];
+    results: SliderApiResponse[];
     total_pages: number;
     total_results: number;
 }
@@ -44,10 +55,10 @@ type SliderResponseBody = {
     posterUrl: string,
     ranking: number,
     movieLabel: string,
-    genres: number[],
-    releaseYear: string | ""
+    genre: string,
+    releaseYear: string
 }
-export type ISliderResponse = {
+export type SliderResponse = {
     sliderId: number,
     label: string,
     response: SliderResponseBody[]
@@ -59,14 +70,13 @@ export type Genre = {
 type GenresApiResponse = {
     genres: Genre[];
 }
-
 type UseSliderResponse = {
-    sliderResponse: ISliderResponse[],
+    sliderResponse: SliderResponse[],
     slideGenres: Genre[],
-    setSliderResponse: (response: ISliderResponse) => void,
+    setSliderResponse: (response: SliderResponse) => void,
     getMoviesSlidersData: (
         elementId: number,
-        sliderDataCallBack: (response: ISliderResponse) => void,
+        sliderDataCallBack: (response: SliderResponse) => void,
         sliderExceptionCallBack: (error: Error) => void
     ) => void,
     getSlideGenres: () => void
@@ -83,7 +93,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -92,7 +102,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -101,7 +111,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -110,7 +120,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -119,7 +129,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -128,7 +138,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 }
@@ -142,7 +152,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -151,7 +161,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -160,7 +170,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -169,7 +179,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -178,7 +188,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -187,7 +197,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 }
@@ -202,7 +212,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -211,7 +221,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -220,7 +230,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -229,7 +239,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -238,7 +248,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -247,7 +257,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 }
@@ -262,7 +272,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -271,7 +281,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -280,7 +290,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -289,7 +299,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -298,7 +308,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -307,7 +317,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 }
@@ -322,7 +332,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -331,7 +341,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -340,7 +350,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -349,7 +359,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -358,7 +368,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -367,7 +377,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 }
@@ -382,7 +392,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -391,7 +401,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -400,7 +410,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -409,7 +419,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -418,7 +428,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 },
@@ -427,7 +437,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
                     ranking: 0,
                     movieLabel: '',
-                    genres: [],
+                    genre: '',
                     releaseYear: ''
 
                 }
@@ -464,18 +474,22 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
 
         axios.get<ApiResponse>(apiData.url, axiosHeader)
             .then((response) => {
-                const sliderResponse: SliderResponseBody[] = response.data.results.map((value) => ({
-                    itemId: value.id,
-                    posterUrl: `https://image.tmdb.org/t/p/w500/${value.poster_path}`,
-                    ranking: value.vote_average,
-                    movieLabel: value.original_title,
-                    genres: [...value.genre_ids],
-                    releaseYear: ``
-                }))
+                const sliderResponse: SliderResponseBody[] = response.data.results.map((value) => {
+                    const releaseYear = value.release_date ? value.release_date.substring(0, 4) : value.first_air_date.substring(0, 4)
+                    return {
+                        itemId: value.id,
+                        posterUrl: `https://image.tmdb.org/t/p/w500${value.poster_path}`,
+                        ranking: value.vote_average,
+                        movieLabel: value.original_title || value.original_name,
+                        genre: getGenreName(value.genre_ids[0]),
+                        releaseYear: releaseYear
+                    }
+                })
 
                 sliderDataCallBack({ sliderId: apiData.id, label: apiData.label, response: sliderResponse })
             })
             .catch((error) => {
+                console.log(error)
                 sliderExceptionCallBack(error)
             });
     },
@@ -493,3 +507,11 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
             })
     }
 }))
+
+const getGenreName = (genreId: number): string => {
+    const id = genreId !== undefined ? genreId : 18
+    const genreIndex = useSliderResponse.getState().slideGenres.findIndex(value => value.id === id)
+    return useSliderResponse.getState().slideGenres[genreIndex].name
+        ? useSliderResponse.getState().slideGenres[genreIndex].name
+        : ''
+}

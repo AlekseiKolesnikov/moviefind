@@ -1,10 +1,11 @@
 import { create } from "zustand";
-import { ISliderResponse, useSliderResponse } from "./useSliderResponse.ts";
+import { SliderResponse, useSliderResponse } from "./useSliderResponse.ts";
 
 export type SliderSection = {
     ref: HTMLDivElement | null,
     isVisible: boolean
     id: number
+    type: string
     label: string
     apiUrl: string
 }
@@ -22,6 +23,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Top Rated Movies",
             id: 0,
+            type: "movie",
             isVisible: false,
             apiUrl: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200"
         },
@@ -29,6 +31,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Top Rated Series",
             id: 1,
+            type: "series",
             isVisible: false,
             apiUrl: "https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200"
         },
@@ -36,6 +39,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Now Paying Movies",
             id: 2,
+            type: "movie",
             isVisible: true,
             apiUrl: "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}"
         },
@@ -43,6 +47,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Airing Today Series",
             id: 3,
+            type: "series",
             isVisible: true,
             apiUrl: "https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc&air_date.lte={max_date}&air_date.gte={min_date}"
         },
@@ -50,6 +55,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Trending Series",
             id: 4,
+            type: "series",
             isVisible: false,
             apiUrl: "https://api.themoviedb.org/3/trending/tv/week?language=en-US"
         },
@@ -57,6 +63,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Trending Movies",
             id: 5,
+            type: "movie",
             isVisible: false,
             apiUrl: "https://api.themoviedb.org/3/trending/movie/week?language=en-US"
         }
@@ -78,7 +85,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
         const getMoviesSlidersData = useSliderResponse.getState().getMoviesSlidersData
         setSliderSectionInitialState(elementRef)
 
-        const sliderResponseCallBack = (response: ISliderResponse) => {
+        const sliderResponseCallBack = (response: SliderResponse) => {
             if (response.response) {
                 updateSliderResponse(response)
             }
