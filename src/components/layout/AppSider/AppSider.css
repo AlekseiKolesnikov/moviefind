@@ -1,7 +1,7 @@
 @import "../../../assets/styles/variables.css";
 
 .sider {
-    height: 100%;
+    flex-grow: 1;
     width: 15%;
     background: var(--secondary-background-color);
     border-right: var(--body-color) solid 2px;

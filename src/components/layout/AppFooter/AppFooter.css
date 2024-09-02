@@ -7,7 +7,7 @@
 }
 
 
-@media screen and (min-width: 1000px) and (max-width: 1300px) {
+@media screen and (min-width: 1105px) and (max-width: 1300px) {
     .footer-container {
         width: var(--tablet-content-container-width);
     }

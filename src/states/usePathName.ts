@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-type PathNameState = {
+type UsePathName = {
     pathName: string,
     setPathName: (pathName: string) => void
 }
 
-export const usePathNameState = create<PathNameState>((set) => ({
+export const usePathName = create<UsePathName>((set) => ({
     pathName: window.location.pathname,
     setPathName: (path) => set(() => ({
         pathName: path

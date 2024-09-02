@@ -1,9 +1,9 @@
-import './ListOptionsContainer.css'
+import './CategoryOptionsContainer.css'
 import '../../../../assets/styles/flex-patterns.css'
-import { ListOption } from "../ListOption/ListOption.tsx";
-import { useCategoryOption } from "../../../../states/categoryListOptionState.ts";
+import { CategoryOption } from "../CategoryOption/CategoryOption.tsx";
+import { useCategoryOption } from "../../../../states/useCategoryOption.ts";
 
-export const ListOptionsContainer = () => {
+export const CategoryOptionsContainer = () => {
     const categoryOptionsData = useCategoryOption((state) => state.categoryOptions)
 
     return (
@@ -14,7 +14,7 @@ export const ListOptionsContainer = () => {
             <hr className="solid"/>
             <div className="start-row-center-flex category-options__list-container">
                 {categoryOptionsData.map((option) => (
-                        <ListOption
+                        <CategoryOption
                             key={option.label}
                             optionLabel={option.label}
                             optionIsSelected={option.isSelected}

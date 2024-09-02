@@ -1,29 +1,46 @@
 @import "../../../assets/styles/variables.css";
 
-.layout-wrapper {
+.layout__wrapper {
     width: 100%;
+    height: fit-content;
+}
+
+.layout__header-container {
+    display: block;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: var(--overlay-z-index);
+    height: var(--header-height);
+}
+
+.layout__content-sider-container {
+    width: var(--desktop-content-container-width);
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 
-.layout-content-sider-container {
-    width: var(--desktop-content-container-width);
-    height: var(--content-height);
+.layout-no-header-container {
+    width: 100%;
+    height: fit-content;
+    padding-top: 60px;
 }
 
-@media screen and (min-width: 1000px) and (max-width: 1300px) {
-    .layout-content-sider-container {
+@media screen and (min-width: 1105px) and (max-width: 1300px) {
+    .layout__content-sider-container {
         max-width: var(--tablet-content-container-width);
     }
 }
 
-@media screen and (max-width: 1000px) {
-    .layout-content-sider-container {
+@media screen and (max-width: 1105px) {
+    .layout__content-sider-container {
         max-width: 100%;
     }
 }
 
 @media screen and (max-width: 450px) {
-    .layout-content-sider-container {
+    .layout__content-sider-container {
         max-width: 100%;
     }
 }

@@ -6,7 +6,7 @@ import { CameraIcon } from "../../../assets/icons/CameraIcon.tsx";
 import { ChairIcon } from "../../../assets/icons/ChairIcon.tsx";
 import { PeopleIcon } from "../../../assets/icons/PeopleIcon.tsx";
 import { Link } from "react-router-dom";
-import { useNavbarOption } from "../../../states/navbarOptionState.ts";
+import { useNavbarOption } from "../../../states/useNavbarOption.ts";
 import classNames from "classnames";
 import { useHandelResize } from "../../../hooks/useHandelResize.ts";
 
