@@ -72,7 +72,7 @@ export const AppContent = () => {
             }
             if (index === 4 || index === 5) {
                 return (
-                    <SliderGrid sliderId={data.sliderId} label={data.label} key={`${key}-description`}/>
+                    <SliderGrid sliderId={data.sliderId} label={data.label} index={index} key={`${key}-description`}/>
                 );
             }
         }
@@ -84,7 +84,7 @@ export const AppContent = () => {
                 key={`${key}-slide-big-container`}
             >
                 <div
-                    className="content-container__movie-series-content"
+                    className={`content-container__movie-series-content ${index === 4 || index === 5 ? "start-row-center-flex" : ""}`}
                     ref={(element) => setRef(element, data.sliderId.toString())}
                     key={`${key}-slide-container`}
                 >

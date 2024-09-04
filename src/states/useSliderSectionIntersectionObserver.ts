@@ -9,7 +9,6 @@ export type SliderSection = {
     label: string
     apiUrl: string
 }
-
 type SliderSectionIntersectionObserver = {
     sliderSection: SliderSection[],
     setInitialSliderSection: (initialElementsRefArray: (HTMLDivElement | null)[]) => void,
@@ -61,11 +60,11 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
         },
         {
             ref: null,
-            label: "Trending Movies",
+            label: "Upcoming Movies",
             id: 5,
             type: "movie",
             isVisible: false,
-            apiUrl: "https://api.themoviedb.org/3/trending/movie/week?language=en-US"
+            apiUrl: "https://api.themoviedb.org/3/movie/upcoming?language=en-US"
         }
     ],
     setInitialSliderSection: ((initialElementsRefArray) => set((state) => ({
@@ -120,6 +119,8 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
                     getSliderLists(entry)
                 }
             }
+        }, {
+            rootMargin: "50px"
         })
         elementRef.forEach((ref) => {
             if (ref) {
