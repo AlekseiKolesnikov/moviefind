@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { useWindowSize } from "./useWindowSize.ts";
 
 export interface ProvidersIcons {
     icon_id: string,
@@ -108,7 +109,7 @@ export const useProvidersIcons = create<UseProvidersIcons>((set) => ({
     setProvidersIcons: (id: string) => {
         set((state) => ({
             providersIcons: state.providersIcons.map((icon) =>
-                icon.icon_id === id && icon.current_icon === icon.initial_icon
+                useWindowSize((state) => state.isDesktopScreen) && icon.icon_id === id && icon.current_icon === icon.initial_icon
                     ? { ...icon, current_icon: icon.hovered_icon }
                     : {...icon, current_icon: icon.initial_icon}
             ),

@@ -1,6 +1,13 @@
 .swiper-slide {
     overflow-y: hidden;
 }
+.swiper-wrapper {
+    width: 100%;
+}
+
+.small-swiper__swiper-settings::-webkit-scrollbar {
+    display: none;
+}
 
 .small-swiper__container {
     width: 100%;
@@ -22,7 +29,7 @@
     position: relative;
     width: 100%;
     height: fit-content;
-    overflow: visible;
+    overflow: scroll;
     place-content: center;
 }
 
@@ -58,8 +65,6 @@
     -webkit-line-clamp: 1;
 }
 
-
-
 .small-swiper__year-genres-container {
     gap: 2px;
 }
@@ -76,9 +81,15 @@
             color: var(--unhoovered-color);
         }
     }
-
 }
 
 .small-swiper__genres-container {
     gap: 2px;
+}
+
+@media screen and (max-width: 450px) {
+    .small-swiper__swiper-settings,
+    .swiper-wrapper {
+        padding-right: var(--mobile-screen-content-padding);
+    }
 }

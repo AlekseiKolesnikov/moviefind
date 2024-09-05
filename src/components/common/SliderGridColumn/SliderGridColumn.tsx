@@ -1,6 +1,5 @@
 import './SliderGridColumn.css'
 import { useSliderResponse } from "../../../states/useSliderResponse.ts";
-import dayjs from "dayjs";
 import { CSSProperties } from "react";
 
 export const SliderGridColumn = ({ sliderId, columnSize }: { sliderId: number, columnSize: number[] }) => {
@@ -31,9 +30,9 @@ export const SliderGridColumn = ({ sliderId, columnSize }: { sliderId: number, c
                                     className="grid-slider__movie-release-date center-column-flex"
                                 >
                                     <span
-                                        className="grid-slider__movie-release-date-number">{dayjs(data.releaseDate).format('DD')}</span>
+                                        className="grid-slider__movie-release-date-number">{data.releaseDate.date}</span>
                                     <span
-                                        className="grid-slider__movie-release-date-month">{dayjs(data.releaseDate).format('MMM')}</span>
+                                        className="grid-slider__movie-release-date-month">{data.releaseDate.month}</span>
                                 </div>
                                 <button className="grid-slider__movie-watch-list-button"></button>
                             </div>
