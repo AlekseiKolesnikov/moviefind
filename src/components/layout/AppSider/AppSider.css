@@ -1,6 +1,7 @@
 @import "../../../assets/styles/variables.css";
 
 .sider {
+    position: relative;
     flex-grow: 1;
     width: 15%;
     background: var(--secondary-background-color);

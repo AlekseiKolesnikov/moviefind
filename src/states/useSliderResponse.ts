@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { useSliderSectionIntersectionObserver } from "./useSliderSectionIntersectionObserver.ts";
 import axios from "axios";
+import dayjs from "dayjs";
 
 const API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MGRlZTQwNjJkZGM1NDI3NzI0ZTdjYmQ2YTg2ZTlhMSIsInN1YiI6IjY0YjE5ZTQ2MGU0ZmM4MDBhZDVkMTA4NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HF8cHLdF2sd2k5dojJVT3B442V4P0kkeIP-ZvilyvHU";
 const axiosHeader = {
@@ -10,27 +11,26 @@ const axiosHeader = {
         Authorization: `Bearer ${API_TOKEN}`
     },
 }
+
 const movieGenresUrl = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 const seriesGenresUrl = "https://api.themoviedb.org/3/genre/tv/list?language=en"
-type Dates = {
+
+interface Dates  {
     maximum: string;
     minimum: string;
 }
-
 interface MovieResponse {
     original_title: string;
     release_date: string;
     title: string;
     video: boolean;
 }
-
 interface SeriesResponse {
     origin_country: string[],
     original_name: string;
     first_air_date: string;
 }
-
-interface SliderApiResponse extends MovieResponse, SeriesResponse {
+interface SliderApiResponse extends MovieResponse, SeriesResponse, PeopleResult {
     adult: boolean;
     backdrop_path: string;
     genre_ids: number[];
@@ -42,35 +42,40 @@ interface SliderApiResponse extends MovieResponse, SeriesResponse {
     vote_average: number;
     vote_count: number;
 }
-
-type ApiResponse = {
+interface ApiResponseMovie {
     dates: Dates;
+}
+interface ApiResponse extends ApiResponseMovie{
     page: number;
     results: SliderApiResponse[];
     total_pages: number;
     total_results: number;
 }
-type SliderResponseBody = {
+interface SliderResponseBody  {
     itemId: number,
     posterUrl: string,
     ranking: number,
     movieLabel: string,
     genre: string,
-    releaseYear: string
+    releaseYear: string,
+    releaseDate: {
+        month: string,
+        date: string
+    }
 }
-export type SliderResponse = {
+export interface SliderResponse  {
     sliderId: number,
     label: string,
     response: SliderResponseBody[]
 }
-export type Genre = {
+export interface Genre  {
     id: number;
     name: string;
 }
-type GenresApiResponse = {
+interface GenresApiResponse  {
     genres: Genre[];
 }
-type UseSliderResponse = {
+interface UseSliderResponse  {
     sliderResponse: SliderResponse[],
     slideGenres: Genre[],
     setSliderResponse: (response: SliderResponse) => void,
@@ -81,367 +86,82 @@ type UseSliderResponse = {
     ) => void,
     getSlideGenres: () => void
 }
+interface KnownFor {
+    adult: boolean;
+    backdrop_path: string;
+    genre_ids: number[];
+    id: number;
+    media_type: string;
+    original_language: string;
+    overview: string;
+    poster_path: string;
+    title?: string;
+    name?: string;
+    original_name?: string;
+    original_title?: string;
+    popularity: number;
+    vote_average: number;
+    vote_count: number;
+    release_date?: string;
+    first_air_date?: string;
+    origin_country?: string[];
+}
+interface PeopleResult  {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string;
+    known_for: KnownFor[];
+}
+
+const createDefaultResponse = (itemId: number) => ({
+    itemId,
+    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
+    ranking: 0,
+    movieLabel: '',
+    genre: '',
+    releaseYear: '',
+    releaseDate: {
+        month: 'Sep',
+        date: '01'
+    }
+});
 
 export const useSliderResponse = create<UseSliderResponse>((set) => ({
     sliderResponse: [
         {
             sliderId: 0,
             label: "Top Rated Movies",
-            response: [
-                {
-                    itemId: 0,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 1,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 2,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 3,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 4,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 5,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                }
-            ]
-        }, {
+            response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
+        },
+        {
             sliderId: 1,
             label: "Top Rated Series",
-            response: [
-                {
-                    itemId: 0,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 1,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 2,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 3,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 4,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 5,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                }
-            ]
+            response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 2,
             label: "Now Paying Movies",
-            response: [
-                {
-                    itemId: 0,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 1,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 2,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 3,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 4,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 5,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                }
-            ]
+            response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 3,
             label: "Airing Today Series",
-            response: [
-                {
-                    itemId: 0,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 1,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 2,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 3,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 4,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 5,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                }
-            ]
+            response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 4,
             label: "Trending Series",
-            response: [
-                {
-                    itemId: 0,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 1,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 2,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 3,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 4,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 5,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                }
-            ]
+            response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 5,
-            label: "Trending Movies",
-            response: [
-                {
-                    itemId: 0,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 1,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 2,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 3,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 4,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                },
-                {
-                    itemId: 5,
-                    posterUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/832px-No-Image-Placeholder.svg.png",
-                    ranking: 0,
-                    movieLabel: '',
-                    genre: '',
-                    releaseYear: ''
-
-                }
-            ]
+            label: "Upcoming Movies",
+            response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         }
     ],
     slideGenres: [],
@@ -474,15 +194,20 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
 
         axios.get<ApiResponse>(apiData.url, axiosHeader)
             .then((response) => {
+
                 const sliderResponse: SliderResponseBody[] = response.data.results.map((value) => {
                     const releaseYear = value.release_date ? value.release_date.substring(0, 4) : value.first_air_date.substring(0, 4)
                     return {
                         itemId: value.id,
                         posterUrl: `https://image.tmdb.org/t/p/w500${value.poster_path}`,
                         ranking: value.vote_average,
-                        movieLabel: value.original_title || value.original_name,
+                        movieLabel: value.title || value.name,
                         genre: getGenreName(value.genre_ids[0]),
-                        releaseYear: releaseYear
+                        releaseYear: releaseYear,
+                        releaseDate: {
+                            month: dayjs(value.release_date || value.first_air_date).format('MMM'),
+                            date: dayjs(value.release_date || value.first_air_date).format('DD')
+                        }
                     }
                 })
 

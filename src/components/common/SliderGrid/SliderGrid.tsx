@@ -1,37 +1,21 @@
 import './SliderGrid.css'
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Grid, Mousewheel } from "swiper/modules";
-import { useSliderResponse } from "../../../states/useSliderResponse.ts";
+import { SliderGridColumn } from "../SliderGridColumn/SliderGridColumn.tsx";
 
-export const SliderGrid = ({ sliderId, label }: { sliderId: number, label: string }) => {
+
+export const SliderGrid = ({ sliderId, label, index }: { sliderId: number, label: string, index: number }) => {
 
     return (
         <div
-            className="black-background-swiper__container"
+            className="grid-slider__container"
+            style={index === 4 ? { paddingTop: "40px" } : { paddingTop: "0" }}
         >
-            <p>{label}</p>
-            <Swiper
-                slidesPerView={2}
-                grid={{
-                    rows: 5,
-                    fill: 'row',
-                }}
-                spaceBetween={30}
-                freeMode={true}
-                cssMode={true}
-                mousewheel={true}
-                modules={[Grid, FreeMode, Mousewheel]}
-                className="mySwiper"
+            <p className="grid-slider__container-label">{label}</p>
+            <div
+                className="grid-slider__two-column-flex-container start-row-center-flex"
             >
-                {useSliderResponse.getState().sliderResponse[sliderId].response.map((data) => (
-                    <SwiperSlide
-                        key={data.itemId}
-                        className="mySlide"
-                    >
-                        <img src={data.posterUrl} alt={data.itemId.toString()}/>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+                <SliderGridColumn sliderId={sliderId} columnSize={[0, 4]}/>
+                <SliderGridColumn sliderId={sliderId} columnSize={[5, 9]}/>
+            </div>
         </div>
     )
 }

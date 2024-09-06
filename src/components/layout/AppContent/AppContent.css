@@ -65,9 +65,3 @@
         padding: 0 0 0 var(--mobile-screen-content-padding);
     }
 }
-
-@media screen and (max-width: 450px) {
-    .content-container__movie-series-content {
-        padding: 0 0 0 var(--mobile-screen-content-padding);
-    }
-}

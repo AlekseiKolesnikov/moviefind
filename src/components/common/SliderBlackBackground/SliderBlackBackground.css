@@ -30,8 +30,12 @@
     position: relative;
     width: 100%;
     height: fit-content;
-    overflow: visible;
+    overflow: scroll;
     place-content: center;
+}
+
+.black-background-swiper__swiper-settings::-webkit-scrollbar {
+    display: none;
 }
 
 /*--------------SWIPER_DEFAULT_STYLES---------------------------------------------*/
@@ -105,5 +109,11 @@
     .swiper-button-next,
     .swiper-button-prev {
         visibility: hidden;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .black-background-swiper__swiper-settings {
+        padding-right: var(--mobile-screen-content-padding);
     }
 }

@@ -1,0 +1,69 @@
+.grid-slider__movie-posters-column-container {
+    width: 50%;
+    min-width: 310px;
+    height: fit-content;
+    padding: var(--mobile-screen-content-padding) 0;
+    gap: 15px;
+
+    div, p {
+        font: var(--main-text);
+        color: var(--unhoovered-color);
+    }
+}
+
+.grid-slider__movie-posters-container {
+    width: 100%;
+    gap: 15px;
+}
+
+.grid-slider__movie-ranking-number {
+    width: 10px;
+    height: fit-content;
+}
+
+.grid-slider__movie-poster-inf-container {
+    width: 100%;
+    padding-bottom: 15px;
+    gap: 10px;
+}
+
+.grid-slider__movie-inf-container {
+    width: 100%;
+}
+
+.grid-slider__movie-poster {
+    height: 60px;
+    width: 40px;
+}
+
+.grid-slider__movie-label {
+    width: 70%;
+    min-width: 160px;
+    height: fit-content;
+}
+
+.grid-slider__movie-release-date {
+}
+
+.grid-slider__movie-release-date-number {
+    font: var(--subheading-text-bigger);
+}
+
+.grid-slider__movie-release-date-month {
+    font: var(--subscript-text-bigger);
+}
+
+.grid-slider__movie-watch-list-button {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='%23000' xmlns='http://www.w3.org/2000/svg' opacity='0.6'%3E %3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M18.7 9V6.2H21.75V3.8H18.7V0.75H16.3V3.8H13.5V6.2H16.3V9H18.7ZM7.65 3.75H10.5V6.15H7.65V17.0521L10.8952 15.3694L12 14.7965L13.1048 15.3694L16.35 17.0521V12H18.75V18.2966V21L16.35 19.7556L12 17.5L7.65 19.7556L5.25 21V18.2966V6.15V3.75H7.65Z'/%3E %3C/svg%3E");
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1105px) {
+    .grid-slider__movie-watch-list-button:hover {
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='%23f50' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M18.7 9V6.2H21.75V3.8H18.7V0.75H16.3V3.8H13.5V6.2H16.3V9H18.7ZM7.65 3.75H10.5V6.15H7.65V17.0521L10.8952 15.3694L12 14.7965L13.1048 15.3694L16.35 17.0521V12H18.75V18.2966V21L16.35 19.7556L12 17.5L7.65 19.7556L5.25 21V18.2966V6.15V3.75H7.65Z'/%3E %3C/svg%3E");
+    }
+}
