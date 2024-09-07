@@ -32,7 +32,7 @@ export const AppHeader = () => {
     });
 
     return (
-        <header className="header center-flex">
+        <div className="header center-flex">
             <div className="header__container space-between-row-center-flex">
                 <div
                     className={isDropDownMenuVisible && !handleResizeStates.isMobileSideBar ?
@@ -129,7 +129,7 @@ export const AppHeader = () => {
                         </aside>}
                 </div>
             </div>
-        </header>
+        </div>
     )
 }
 

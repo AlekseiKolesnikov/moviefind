@@ -30,7 +30,7 @@
     position: relative;
     width: 100%;
     height: fit-content;
-    overflow: scroll;
+    overflow: visible;
     place-content: center;
 }
 
@@ -43,6 +43,7 @@
 .swiper-button-prev {
     position: absolute !important;
     background-color: white;
+    z-index: var(--high-z-index);
     padding: 22px;
     background-position: center;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .05), 0 1px 0 1px rgba(0, 0, 0, .05), 0 0 0 1px rgba(0, 0, 0, .05);
@@ -115,5 +116,6 @@
 @media screen and (max-width: 450px) {
     .black-background-swiper__swiper-settings {
         padding-right: var(--mobile-screen-content-padding);
+        overflow: scroll;
     }
 }

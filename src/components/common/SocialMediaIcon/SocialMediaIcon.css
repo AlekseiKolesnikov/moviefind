@@ -1,0 +1,13 @@
+.social-media-logo {
+    height: fit-content;
+    width: fit-content;
+}
+
+.social-media-logo__image {
+    width: 24px;
+    height: 24px;
+}
+
+.social-media-logo__image:hover {
+    cursor: pointer;
+}
