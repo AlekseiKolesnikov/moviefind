@@ -1,7 +1,6 @@
 import './AppFooter.css'
-import { SocialMediaIcon } from "../../common/SocialMediaIcon/SocialMediaIcon.tsx";
-import { useIcons } from "../../../states/useIcons.ts";
-import { StoreIcon } from "../../common/StoreIcon/StoreIcon.tsx";
+import { footerSocialMediaIcons, footerStoreIcons } from "../../../data/footer-icons.ts";
+import { FooterIcons } from "../../common/FooterIcons /FooterIcons .tsx";
 
 export const AppFooter = () => {
 
@@ -9,8 +8,8 @@ export const AppFooter = () => {
         <footer className="footer">
             <div className="footer__container center-column-flex">
                 <div className="footer__social-media center-row-flex">
-                    {useIcons.getState().socialMediaIcons.map((icon) => (
-                        <SocialMediaIcon id={icon.icon_id}/>
+                    {footerSocialMediaIcons.map((icon) => (
+                        <FooterIcons iconSrc={icon.src} iconAlt={icon.alt}/>
                     ))}
                 </div>
                 <ul className="footer__support-links">
@@ -27,8 +26,8 @@ export const AppFooter = () => {
                     <li className="footer__support-link">Support Service</li>
                 </ul>
                 <div className="footer__stores center-row-flex">
-                    {useIcons.getState().storeIcons.map((icon) => (
-                        <StoreIcon id={icon.icon_id}/>
+                    {footerStoreIcons.map((icon) => (
+                        <FooterIcons iconSrc={icon.src} iconAlt={icon.alt}/>
                     ))}
                 </div>
                 <div className="footer__copy-rights space-between-row-center-flex">

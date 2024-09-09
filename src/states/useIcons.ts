@@ -12,16 +12,10 @@ export interface Icons {
 
 interface UseIcons {
     providersIcons: Icons[],
-    socialMediaIcons: Icons[],
-    storeIcons: Icons[],
     setProvidersIcons: (id: string) => void
-    setSocialMediaIcons: (id: string) => void
-    getSocialMediaIcons: (id: string) => number
-    setStoreIcons: (id: string) => void
-    getStoreIcons: (id: string) => number
 }
 
-export const useIcons = create<UseIcons>((set, get) => ({
+export const useIcons = create<UseIcons>((set) => ({
     providersIcons: [
         {
             icon_id: "tv",
@@ -112,58 +106,6 @@ export const useIcons = create<UseIcons>((set, get) => ({
             isHovered: false
         }
     ],
-    socialMediaIcons: [
-        {
-            icon_id: "inst",
-            hovered_icon: "src/assets/icons/svg/instagram-hovered.svg",
-            initial_icon: "src/assets/icons/svg/instagram-unhovered.svg",
-            current_icon: "src/assets/icons/svg/instagram-unhovered.svg",
-            alt: "instagram_logo",
-            isHovered: false
-        },
-        {
-            icon_id: "tw",
-            hovered_icon: "src/assets/icons/svg/twitter-hovered.svg",
-            initial_icon: "src/assets/icons/svg/twitter-unhovered.svg",
-            current_icon: "src/assets/icons/svg/twitter-unhovered.svg",
-            alt: "twitter_logo",
-            isHovered: false
-        },
-        {
-            icon_id: "fb",
-            hovered_icon: "src/assets/icons/svg/facebook-hovered.svg",
-            initial_icon: "src/assets/icons/svg/facebook-unhovered.svg",
-            current_icon: "src/assets/icons/svg/facebook-unhovered.svg",
-            alt: "facebook_logo",
-            isHovered: false
-        },
-        {
-            icon_id: "yt",
-            hovered_icon: "src/assets/icons/svg/youtube-hovered.svg",
-            initial_icon: "src/assets/icons/svg/youtube-unhovered.svg",
-            current_icon: "src/assets/icons/svg/youtube-unhovered.svg",
-            alt: "youtube_logo",
-            isHovered: false
-        }
-    ],
-    storeIcons: [
-        {
-            icon_id: "as",
-            hovered_icon: "src/assets/icons/svg/app-store-hovered.svg",
-            initial_icon: "src/assets/icons/svg/app-store-unhovered.svg",
-            current_icon: "src/assets/icons/svg/app-store-unhovered.svg",
-            alt: "app_store",
-            isHovered: false
-        },
-        {
-            icon_id: "gp",
-            hovered_icon: "src/assets/icons/svg/google-play-hovered.svg",
-            initial_icon: "src/assets/icons/svg/google-play-unhovered.svg",
-            current_icon: "src/assets/icons/svg/google-play-unhovered.svg",
-            alt: "google_play",
-            isHovered: false
-        }
-    ],
     setProvidersIcons: (id: string) => {
         set((state) => ({
             providersIcons: state.providersIcons.map((icon) =>
@@ -172,29 +114,5 @@ export const useIcons = create<UseIcons>((set, get) => ({
                     : {...icon, current_icon: icon.initial_icon}
             ),
         }));
-    },
-    setSocialMediaIcons: (id: string) => {
-        set((state) => ({
-            socialMediaIcons: state.socialMediaIcons.map((icon) =>
-                (!useWindowSize.getState().isMobileScreen && icon.icon_id === id && icon.current_icon === icon.initial_icon)
-                    ? { ...icon, current_icon: icon.hovered_icon }
-                    : {...icon, current_icon: icon.initial_icon}
-            ),
-        }));
-    },
-    getSocialMediaIcons: (id: string) => {
-        return get().socialMediaIcons.findIndex((icon) => icon.icon_id === id)
-    },
-    setStoreIcons: (id: string) => {
-        set((state) => ({
-            storeIcons: state.storeIcons.map((icon) =>
-                (!useWindowSize.getState().isMobileScreen && icon.icon_id === id && icon.current_icon === icon.initial_icon)
-                    ? { ...icon, current_icon: icon.hovered_icon }
-                    : {...icon, current_icon: icon.initial_icon}
-            ),
-        }));
-    },
-    getStoreIcons: (id: string) => {
-        return get().storeIcons.findIndex((icon) => icon.icon_id === id)
     }
 }))

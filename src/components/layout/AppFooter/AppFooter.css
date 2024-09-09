@@ -34,7 +34,7 @@
     display: inline-block;
     width: fit-content;
     height: fit-content;
-    color: #717171;
+    color: var(--footer-unhovered-color);
     margin-block-end: 15px;
     padding-inline-end: 27px;
 }
@@ -46,7 +46,7 @@
 .footer__copy-rights {
     width: 100%;
     height: fit-content;
-    color: #717171;
+    color: var(--footer-unhovered-color);
 }
 
 .footer__project-founder-name {
@@ -56,12 +56,12 @@
 @media screen and (min-width: 450px) {
     .footer__support-link:hover {
         cursor: pointer;
-        color: #919191;
+        color: var(--footer-hovered-color);
     }
 
     .footer__project-founder-name:hover {
         cursor: pointer;
-        color: #919191;
+        color: var(--footer-hovered-color);
     }
 }
 
