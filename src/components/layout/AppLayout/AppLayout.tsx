@@ -20,13 +20,13 @@ export const AppLayout = () => {
 
     return (
         <div className="layout__wrapper center-column-top-flex">
-            <div className="layout__header-container center-column-top-flex">
+            <header className="layout__header-container center-column-top-flex">
                 <AppHeader/>
-            </div>
-            <div className="layout__content-sider-container center-row-flex">
+            </header>
+            <main className="layout__content-sider-container center-row-flex">
                 {handleResizeStates.isSideBarWhite && <AppSider/>}
                 <AppContent/>
-            </div>
+            </main>
             <AppFooter/>
         </div>
     )

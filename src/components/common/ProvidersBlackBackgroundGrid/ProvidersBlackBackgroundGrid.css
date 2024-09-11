@@ -201,13 +201,7 @@
     }
 }
 
-@media screen and (max-width: 450px) {
-    .providers-grid__grid-container {
-        padding-right: var(--mobile-screen-content-padding);
-    }
-}
-
-@media screen and (min-width: 1105px) {
+@media screen and (min-width: 450px) {
     .providers-grid__common-class:hover {
         cursor: pointer;
         background-color: #F1F1F1;

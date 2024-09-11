@@ -1,15 +1,15 @@
 import './ProvidersBlackBackgroundGrid.css'
 import '../../../assets/styles/flex-patterns.css';
-import { ProvidersIcons, useProvidersIcons } from "../../../states/useProvidersIcons.ts";
+import { Icons, useIcons } from "../../../states/useIcons.ts";
 import { useEffect, useState } from "react";
 
 export const ProvidersBlackBackgroundGrid = () => {
-    const updateProvidersIcons = useProvidersIcons((state) => state.setProvidersIcons)
+    const updateProvidersIcons = useIcons((state) => state.setProvidersIcons)
     const [isHovered, setIsHovered] = useState(false)
-    const [providerIcon, setProviderIcon] = useState<ProvidersIcons[]>(useProvidersIcons.getState().providersIcons)
+    const [providerIcon, setProviderIcon] = useState<Icons[]>(useIcons.getState().providersIcons)
 
     useEffect(() => {
-        setProviderIcon(useProvidersIcons.getState().providersIcons)
+        setProviderIcon(useIcons.getState().providersIcons)
     }, [isHovered])
 
     return (
@@ -159,7 +159,7 @@ export const ProvidersBlackBackgroundGrid = () => {
                         updateProvidersIcons('sony')
                         setIsHovered(!isHovered)
                     }}
-                    >
+                >
                     <img
                         className="providers-grid__sony-logo"
                         src={providerIcon[9].current_icon}
@@ -175,4 +175,3 @@ export const ProvidersBlackBackgroundGrid = () => {
         </div>
     )
 }
-
