@@ -93,3 +93,13 @@
         padding-right: var(--mobile-screen-content-padding);
     }
 }
+
+@media screen and (min-width: 450px) {
+    .swiper-slide:hover {
+        cursor: pointer;
+
+        .small-swiper__movie-label {
+            color: var(--accent-color);
+        }
+    }
+}

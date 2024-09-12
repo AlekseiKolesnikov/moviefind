@@ -3,7 +3,7 @@ import './SlideRanking.css'
 export const SlideRanking = ({ posterUrl, itemId, ranking }: { posterUrl: string, itemId: number, ranking: number }) => {
 
     return (
-        <>
+        <div className="swiper__slide-container">
           <img src={posterUrl} alt={itemId.toString()}/>
           {ranking > 8
               ? (
@@ -17,7 +17,7 @@ export const SlideRanking = ({ posterUrl, itemId, ranking }: { posterUrl: string
                   <div className="swiper__slide-ranking-green">{ranking.toFixed(1)}</div>
               )
           }
-        </>
+        </div>
     )
 }
 
