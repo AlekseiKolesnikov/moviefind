@@ -1,15 +1,17 @@
 import './SliderWithDescription.css'
-import '../../../assets/styles/flex-patterns.css'
+import '../../../../assets/styles/flex-patterns.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Keyboard, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/controller';
-import { useSliderResponse } from "../../../states/useSliderResponse.ts";
+import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
 import { SlideRanking } from "../SlideRanking/SlideRanking.tsx";
+import { useMoviePageResponse } from "../../../../states/useMoviePageResponse.ts";
 
-export const SliderWithDescription = ({ sliderId, label }: { sliderId: number, label: string }) => {
+export const SliderWithDescription = ({ sliderId, label, type }: { sliderId: number, label: string, type: string }) => {
+    const updateMoviePageContent = useMoviePageResponse((state) => state.getMoviePageContent)
 
     return (
         <div
@@ -54,6 +56,9 @@ export const SliderWithDescription = ({ sliderId, label }: { sliderId: number, l
                         <SwiperSlide
                             key={data.itemId}
                             className="small-swiper__slide start-column-top-flex"
+                            onClick={() => {
+                                updateMoviePageContent(type, data.itemId)
+                            }}
                         >
                             <SlideRanking
                                 posterUrl={data.posterUrl}

@@ -1,23 +1,29 @@
-.layout__content-sider-container {
+.movie-series-page__container {
     position: relative;
     width: var(--desktop-content-container-width);
     height: 100%;
 }
 
+.list-option-pages {
+    width: 100%;
+    height: auto;
+    padding: var(--desktop-screen-content-top-bottom-padding) var(--desktop-screen-content-side-padding);
+}
+
 @media screen and (min-width: 1105px) and (max-width: 1300px) {
-    .layout__content-sider-container {
+    .movie-series-page__container {
         max-width: var(--tablet-content-container-width);
     }
 }
 
 @media screen and (max-width: 1105px) {
-    .layout__content-sider-container {
+    .movie-series-page__container {
         max-width: 100%;
     }
 }
 
 @media screen and (max-width: 450px) {
-    .layout__content-sider-container {
+    .movie-series-page__container {
         max-width: 100%;
     }
 }

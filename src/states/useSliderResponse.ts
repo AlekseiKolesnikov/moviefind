@@ -66,6 +66,7 @@ interface SliderResponseBody  {
 export interface SliderResponse  {
     sliderId: number,
     label: string,
+    type: string,
     response: SliderResponseBody[]
 }
 export interface Genre  {
@@ -136,31 +137,37 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
         {
             sliderId: 0,
             label: "Top Rated Movies",
+            type: "movie",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 1,
             label: "Top Rated Series",
+            type: "series",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 2,
             label: "Now Paying Movies",
+            type: "movie",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 3,
             label: "Airing Today Series",
+            type: "series",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 4,
             label: "Trending Series",
+            type: "series",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 5,
             label: "Upcoming Movies",
+            type: "movie",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         }
     ],
@@ -171,11 +178,13 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                 {
                     sliderId: response.sliderId,
                     label: response.label,
+                    type: value.type,
                     response: response.response
                 } :
                 {
                     sliderId: value.sliderId,
                     label: value.label,
+                    type: value.type,
                     response: value.response
                 }
             )
@@ -189,7 +198,8 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
         const apiData = {
             url: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].apiUrl,
             id: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].id,
-            label: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].label
+            label: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].label,
+            type: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].type
         }
 
         axios.get<ApiResponse>(apiData.url, axiosHeader)
@@ -211,7 +221,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     }
                 })
 
-                sliderDataCallBack({ sliderId: apiData.id, label: apiData.label, response: sliderResponse })
+                sliderDataCallBack({ sliderId: apiData.id, label: apiData.label, type: apiData.type, response: sliderResponse })
             })
             .catch((error) => {
                 console.log(error)

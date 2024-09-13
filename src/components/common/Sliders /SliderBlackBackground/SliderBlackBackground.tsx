@@ -1,7 +1,7 @@
 import './SliderBlackBackground.css'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Mousewheel, Navigation } from "swiper/modules";
-import { useSliderResponse } from "../../../states/useSliderResponse.ts";
+import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
 
 export const SliderBlackBackground = ({ sliderId, label }: { sliderId: number, label: string }) => {
 

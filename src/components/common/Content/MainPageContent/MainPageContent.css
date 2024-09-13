@@ -1,7 +1,7 @@
-.content-container {
+.main-page-content-container {
     flex-grow: 1;
     background: white;
-    padding: var(--big-screen-content-top-bottom-padding) 0;
+    padding: var(--desktop-screen-content-top-bottom-padding) 0;
     overflow: hidden;
     height: fit-content;
 }
@@ -14,23 +14,18 @@
     width: 85%;
 }
 
-.content-container__trailer-content {
+.main-page-content-container__trailer-content {
     padding: 0 var(--desktop-screen-content-side-padding);
 }
 
-.list-option-pages {
-    width: 100%;
-    height: auto;
-}
-
-.content-container__movie-series-content {
+.main-page-content-container__movie-series-content {
     width: 100%;
     height: auto;
     padding: 0 var(--desktop-screen-content-side-padding) 30px;
     overflow: hidden;
 }
 
-.content-container__black-background-content {
+.main-page-content-container__black-background-content {
     background: black;
     width: 100%;
     height: fit-content;
@@ -51,17 +46,17 @@
 }
 
 @media screen and (min-width: 450px) and (max-width: 1105px) {
-    .content-container__trailer-content {
+    .main-page-content-container__trailer-content {
         padding: 0 var(--tablet-screen-content-side-padding);
     }
 
-    .content-container__movie-series-content {
+    .main-page-content-container__movie-series-content {
         padding: 0 var(--desktop-screen-content-side-padding) 15px;
     }
 }
 
 @media screen and (max-width: 650px) {
-    .content-container__movie-series-content {
+    .main-page-content-container__movie-series-content {
         padding: 0 0 0 var(--mobile-screen-content-padding);
     }
 }

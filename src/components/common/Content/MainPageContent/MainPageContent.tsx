@@ -1,27 +1,21 @@
-import './AppContent.css';
-import '../../../assets/styles/flex-patterns.css';
-import {
-    CategoryOptionsContainer
-} from "../../common/CategoryOptions/CategoryOptionsContainer/CategoryOptionsContainer.tsx";
-import { CategoryOptionData } from "../../common/CategoryOptions/CategoryOptionData/CategoryOptionData.tsx";
-import { VideoTrailerFeature } from "../../features/VideoTrailerFeature/VideoTrailerFeature.tsx";
-import { useHandelResize } from "../../../hooks/useHandelResize.ts";
+import './MainPageContent.css';
+import '../../../../assets/styles/flex-patterns.css';
+import { VideoTrailerFeature } from "../../../features/VideoTrailerFeature/VideoTrailerFeature.tsx";
+import { useHandelResize } from "../../../../hooks/useHandelResize.ts";
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
-import { SliderWithDescription } from "../../common/SliderWithDescription/SliderWithDescription.tsx";
+import { SliderWithDescription } from "../../Sliders /SliderWithDescription/SliderWithDescription.tsx";
 import { useCallback, useEffect, useState } from "react";
-import { useRefs } from "../../../hooks/useRefs.ts";
-import { SliderResponse, useSliderResponse } from "../../../states/useSliderResponse.ts";
-import { SliderBlackBackground } from "../../common/SliderBlackBackground/SliderBlackBackground.tsx";
-import { useSliderSectionIntersectionObserver } from "../../../states/useSliderSectionIntersectionObserver.ts";
-import { SliderGrid } from "../../common/SliderGrid/SliderGrid.tsx";
-import {
-    ProvidersBlackBackgroundGrid
-} from "../../common/ProvidersBlackBackgroundGrid/ProvidersBlackBackgroundGrid.tsx";
+import { useRefs } from "../../../../hooks/useRefs.ts";
+import { SliderResponse, useSliderResponse } from "../../../../states/useSliderResponse.ts";
+import { SliderBlackBackground } from "../../Sliders /SliderBlackBackground/SliderBlackBackground.tsx";
+import { useSliderSectionIntersectionObserver } from "../../../../states/useSliderSectionIntersectionObserver.ts";
+import { SliderGrid } from "../../Sliders /SliderGrid/SliderGrid.tsx";
+import { ProvidersBlackBackgroundGrid } from "../../ProvidersBlackBackgroundGrid/ProvidersBlackBackgroundGrid.tsx";
 import clsx from "clsx";
 
-export const AppContent = () => {
+export const MainPageContent = () => {
     const windowPathName = window.location.pathname
     const handleResizeStates = useHandelResize()
     const { refsByKey, setRef } = useRefs()
@@ -53,13 +47,14 @@ export const AppContent = () => {
         const renderContent = () => {
             if (index === 0 || index === 1) {
                 return (
-                    <SliderWithDescription sliderId={data.sliderId} label={data.label} key={`${key}-description`}/>
+                    <SliderWithDescription sliderId={data.sliderId} label={data.label} type={data.type}
+                                           key={`${key}-description`}/>
                 );
             }
             if (index === 2 || index === 3) {
                 return (
                     <div
-                        className="content-container__black-background-content start-column-top-flex"
+                        className="main-page-content-container__black-background-content start-column-top-flex"
                         key={key}
                     >
                         <SliderBlackBackground
@@ -88,7 +83,7 @@ export const AppContent = () => {
                 key={`${key}-slide-big-container`}
             >
                 <div
-                    className={clsx('content-container__movie-series-content', {
+                    className={clsx('main-page-content-container__movie-series-content', {
                         'start-row-center-flex': index === 4 || index === 5
                     })}
                     ref={(element) => setRef(element, data.sliderId.toString())}
@@ -101,19 +96,14 @@ export const AppContent = () => {
     }, [setRef]);
 
     return (
+
         <div
-            className={clsx('content-container', 'space-between-column-start-flex', {
+            className={clsx('main-page-content-container', 'space-between-column-start-flex', {
                 'notFullScreenWidth': handleResizeStates.isSideBarWhite,
                 'fullScreenWidth': !handleResizeStates.isSideBarWhite
             })}
         >
-            <section className="content-container__trailer-content center-flex">
-                {windowPathName !== '/' && (
-                    <div className="list-option-pages">
-                        <CategoryOptionsContainer/>
-                        <CategoryOptionData/>
-                    </div>
-                )}
+            <section className="main-page-content-container__trailer-content center-flex">
                 {windowPathName === '/' && window.innerWidth > 900 && (
                     <VideoTrailerFeature/>
                 )}

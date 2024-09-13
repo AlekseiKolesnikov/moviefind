@@ -1,8 +1,8 @@
 import '../assets/styles/App.css'
 import { Route, Routes } from "react-router-dom";
-import { MoviesPage } from "../pages/MoviesPage/MoviesPage.tsx";
-import { TvShowsPage } from "../pages/TvShowsPage/TvShowsPage.tsx";
-import { PeoplePage } from "../pages/PeoplePage/PeoplePage.tsx";
+import { MovieCategoriesPage } from "../pages/MovieCategoriesPage/MovieCategoriesPage.tsx";
+import { TvShowCategoriesPage } from "../pages/TvShowCategoriesPage/TvShowCategoriesPage.tsx";
+import { PeopleCategoriesPage } from "../pages/PeopleCategoriesPage/PeopleCategoriesPage.tsx";
 import { MainPage } from "../pages/MainPage/MainPage.tsx";
 
 export const MAIN_PAGE = "/"
@@ -16,9 +16,9 @@ function App() {
         <>
             <Routes>
                 <Route path={MAIN_PAGE} element={<MainPage/>}/>
-                <Route path={MOVIES_PAGE} element={<MoviesPage/>}/>
-                <Route path={TV_SHOWS_PAGE} element={<TvShowsPage/>}/>
-                <Route path={PEOPLE_PAGE} element={<PeoplePage/>}/>
+                <Route path={MOVIES_PAGE} element={<MovieCategoriesPage/>}/>
+                <Route path={TV_SHOWS_PAGE} element={<TvShowCategoriesPage/>}/>
+                <Route path={PEOPLE_PAGE} element={<PeopleCategoriesPage/>}/>
             </Routes>
         </>
     )

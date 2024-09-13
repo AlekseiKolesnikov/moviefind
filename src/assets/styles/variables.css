@@ -13,7 +13,7 @@
     --no-header-content-height: calc(100vh - 60px);
     --navbar-width: 170px;
     --hoovered-gray-color: #191919;
-    --hoovered-light-gray-color: #F1F1F1;
+    --hoovered-light-gray-color: #E1E0E0FF;
     --grid-providers-color: #151515F2;
     --footer-hovered-color: #919191;
     --footer-unhovered-color: #717171;
@@ -23,7 +23,7 @@
     --desktop-content-container-width: 1300px;
     --tablet-content-container-width: 1105px;
     --mobile-content-container-width: 450px;
-    --big-screen-content-top-bottom-padding: 30px;
+    --desktop-screen-content-top-bottom-padding: 30px;
     --desktop-screen-content-side-padding: 45px;
     --tablet-screen-content-side-padding: 35px;
     --mobile-screen-content-padding: 25px;

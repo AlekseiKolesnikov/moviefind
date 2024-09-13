@@ -1,14 +1,14 @@
 import './AppLayout.css'
 import '../../../assets/styles/flex-patterns.css'
 import { AppHeader } from "../AppHeader/AppHeader.tsx";
-import { AppSider } from "../AppSider/AppSider.tsx";
-import { AppContent } from "../AppContent/AppContent.tsx";
 import { AppFooter } from "../AppFooter/AppFooter.tsx";
-import { useHandelResize } from "../../../hooks/useHandelResize.ts";
-import { useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 
-export const AppLayout = () => {
-    const handleResizeStates = useHandelResize()
+interface LayoutProps {
+    children: ReactNode;
+}
+
+export const AppLayout: React.FC<LayoutProps> = ({ children }) => {
     const elementRef = useRef<HTMLDivElement>(null)
     const [contentElementHeight, setContentElementHeight] = useState(0)
 
@@ -23,9 +23,8 @@ export const AppLayout = () => {
             <header className="layout__header-container center-column-top-flex">
                 <AppHeader/>
             </header>
-            <main className="layout__content-sider-container center-row-flex">
-                {handleResizeStates.isSideBarWhite && <AppSider/>}
-                <AppContent/>
+            <main className="layout__content-main-container">
+                {children}
             </main>
             <AppFooter/>
         </div>

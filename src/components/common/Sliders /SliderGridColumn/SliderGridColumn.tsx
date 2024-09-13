@@ -1,5 +1,5 @@
 import './SliderGridColumn.css'
-import { useSliderResponse } from "../../../states/useSliderResponse.ts";
+import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
 import { CSSProperties } from "react";
 
 export const SliderGridColumn = ({ sliderId, columnSize }: { sliderId: number, columnSize: number[] }) => {
