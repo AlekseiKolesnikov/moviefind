@@ -2,7 +2,7 @@ import './SliderGrid.css'
 import { SliderGridColumn } from "../SliderGridColumn/SliderGridColumn.tsx";
 
 
-export const SliderGrid = ({ sliderId, label, index }: { sliderId: number, label: string, index: number }) => {
+export const SliderGrid = ({ sliderId, label, index, type }: { sliderId: number, label: string, index: number, type: string }) => {
 
     return (
         <div
@@ -13,8 +13,8 @@ export const SliderGrid = ({ sliderId, label, index }: { sliderId: number, label
             <div
                 className="grid-slider__two-column-flex-container start-row-center-flex"
             >
-                <SliderGridColumn sliderId={sliderId} columnSize={[0, 4]}/>
-                <SliderGridColumn sliderId={sliderId} columnSize={[5, 9]}/>
+                <SliderGridColumn sliderId={sliderId} columnSize={[0, 4]} type={type}/>
+                <SliderGridColumn sliderId={sliderId} columnSize={[5, 9]} type={type}/>
             </div>
         </div>
     )

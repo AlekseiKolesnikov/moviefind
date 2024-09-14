@@ -47,8 +47,12 @@ export const MainPageContent = () => {
         const renderContent = () => {
             if (index === 0 || index === 1) {
                 return (
-                    <SliderWithDescription sliderId={data.sliderId} label={data.label} type={data.type}
-                                           key={`${key}-description`}/>
+                    <SliderWithDescription
+                        sliderId={data.sliderId}
+                        label={data.label}
+                        type={data.type}
+                        key={`${key}-description`}
+                    />
                 );
             }
             if (index === 2 || index === 3) {
@@ -60,6 +64,7 @@ export const MainPageContent = () => {
                         <SliderBlackBackground
                             sliderId={data.sliderId}
                             label={data.label}
+                            type={data.type}
                             key={`${key}-black-background`}
                         />
                         {index === 3 && <ProvidersBlackBackgroundGrid/>}
@@ -68,7 +73,13 @@ export const MainPageContent = () => {
             }
             if (index === 4 || index === 5) {
                 return (
-                    <SliderGrid sliderId={data.sliderId} label={data.label} index={index} key={`${key}-description`}/>
+                    <SliderGrid
+                        sliderId={data.sliderId}
+                        label={data.label}
+                        index={index}
+                        type={data.type}
+                        key={`${key}-description`}
+                    />
                 );
             }
         }

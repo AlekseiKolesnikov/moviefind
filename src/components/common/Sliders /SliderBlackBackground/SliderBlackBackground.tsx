@@ -2,8 +2,15 @@ import './SliderBlackBackground.css'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Mousewheel, Navigation } from "swiper/modules";
 import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
+import { useMoviePageResponse } from "../../../../states/useMoviePageResponse.ts";
+import { useMovieTVShowsNavigation } from "../../../../states/useMovieTVShowsNavigation.ts";
+import { useNavigate } from "react-router-dom";
 
-export const SliderBlackBackground = ({ sliderId, label }: { sliderId: number, label: string }) => {
+export const SliderBlackBackground = ({ sliderId, label, type }: { sliderId: number, label: string, type: string }) => {
+    const updateMoviePageContent = useMoviePageResponse((state) => state.getMoviePageContent)
+    const updateMovieTVShowsNavigation = useMovieTVShowsNavigation((state) => state.setMovieTVShowsRoutes)
+    const navigate = useNavigate()
+
 
     return (
         <div
@@ -41,6 +48,11 @@ export const SliderBlackBackground = ({ sliderId, label }: { sliderId: number, l
                     <SwiperSlide
                         key={data.itemId}
                         className="black-background-swiper__slide"
+                        onClick={() => {
+                            updateMoviePageContent(type, data.itemId)
+                            updateMovieTVShowsNavigation(type, data.itemId.toString())
+                            navigate(useMovieTVShowsNavigation.getState().movieTVShowsRoutes.pathName)
+                        }}
                     >
                         <img src={data.posterUrl} alt={data.itemId.toString()}/>
                         {data.ranking > 8
