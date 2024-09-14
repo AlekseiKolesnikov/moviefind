@@ -30,7 +30,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Top Rated Series",
             id: 1,
-            type: "series",
+            type: "tv",
             isVisible: false,
             apiUrl: "https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200"
         },
@@ -46,7 +46,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Airing Today Series",
             id: 3,
-            type: "series",
+            type: "tv",
             isVisible: true,
             apiUrl: "https://api.themoviedb.org/3/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc&air_date.lte={max_date}&air_date.gte={min_date}"
         },
@@ -54,7 +54,7 @@ export const useSliderSectionIntersectionObserver = create<SliderSectionIntersec
             ref: null,
             label: "Trending Series",
             id: 4,
-            type: "series",
+            type: "tv",
             isVisible: false,
             apiUrl: "https://api.themoviedb.org/3/trending/tv/week?language=en-US"
         },

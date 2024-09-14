@@ -9,9 +9,13 @@ import 'swiper/css/controller';
 import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
 import { SlideRanking } from "../SlideRanking/SlideRanking.tsx";
 import { useMoviePageResponse } from "../../../../states/useMoviePageResponse.ts";
+import { useMovieTVShowsNavigation } from "../../../../states/useMovieTVShowsNavigation.ts";
+import { useNavigate } from "react-router-dom";
 
 export const SliderWithDescription = ({ sliderId, label, type }: { sliderId: number, label: string, type: string }) => {
     const updateMoviePageContent = useMoviePageResponse((state) => state.getMoviePageContent)
+    const updateMovieTVShowsNavigation = useMovieTVShowsNavigation((state) => state.setMovieTVShowsRoutes)
+    const navigate = useNavigate()
 
     return (
         <div
@@ -58,6 +62,8 @@ export const SliderWithDescription = ({ sliderId, label, type }: { sliderId: num
                             className="small-swiper__slide start-column-top-flex"
                             onClick={() => {
                                 updateMoviePageContent(type, data.itemId)
+                                updateMovieTVShowsNavigation(type, data.itemId.toString())
+                                navigate(useMovieTVShowsNavigation.getState().movieTVShowsRoutes.pathName)
                             }}
                         >
                             <SlideRanking
