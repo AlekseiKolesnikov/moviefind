@@ -69,7 +69,12 @@ export const SliderWithDescription = ({ sliderId, label, type }: { sliderId: num
                                     (response: MovieTvPageContent | undefined) => {
                                         if (response) {
                                             setMoviePageContentCallback(data.itemId, response)
-                                            navigate(useMovieTVShowsNavigation.getState().movieTVShowsRoutes.pathName)
+                                            navigate(useMovieTVShowsNavigation.getState().movieTVShowsRoutes.pathName, {
+                                                state: {
+                                                    id: data.itemId,
+                                                    type: type
+                                                }
+                                            })
                                         }
                                     }
                                 )

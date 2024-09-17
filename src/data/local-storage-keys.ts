@@ -1,0 +1,1 @@
+export const MOVIE_PAGE_CONTENT_KEY = "movie_tv_page_data"

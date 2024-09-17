@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { ApiContentPageResponse, MovieTvPageContent } from "../interfaces /MoviePageResponseInterface.ts";
 import axios from "axios";
+import { MOVIE_PAGE_CONTENT_KEY } from "../data/local-storage-keys.ts";
 
 const API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MGRlZTQwNjJkZGM1NDI3NzI0ZTdjYmQ2YTg2ZTlhMSIsIm5iZiI6MTcyNTIyNjU4MS4xNTQ3NTUsInN1YiI6IjY0YjE5ZTQ2MGU0ZmM4MDBhZDVkMTA4NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.trEXym5ftq5vCjNXU63PAobmGngKZ_xDB1nKyYqs-NE";
 const axiosHeader = {
@@ -15,10 +16,10 @@ const BASE_API_IMAGE_URL = 'https://image.tmdb.org/t/p/w500'
 
 interface MoviePageResponseInterface {
     moviePageContent: MovieTvPageContent[],
-    setMoviePageContent: (id: number, response: MovieTvPageContent | undefined) => void,
+    setMoviePageContent: (id: number | null, response: MovieTvPageContent | undefined) => void,
     getMoviePageContent: (
-        type: string,
-        id: number,
+        type: string | undefined,
+        id: number | null,
         pageContentResponseCallback: (response: MovieTvPageContent | undefined) => void
     ) => void
 }
@@ -26,20 +27,26 @@ interface MoviePageResponseInterface {
 export const useMoviePageResponse = create<MoviePageResponseInterface>((set, get) => ({
     moviePageContent: [] as MovieTvPageContent[],
     setMoviePageContent: ((id, response) => set((state) => {
-        if (get().moviePageContent.length !== 0) {
-            state.moviePageContent = []
+        if (get().moviePageContent.length >= 2) {
+            state.moviePageContent.shift()
         }
 
         const moviePageResponse = response ? state.moviePageContent
             .filter((content) => content.id !== id)
             .concat(response) : state.moviePageContent
 
+        localStorage.setItem(MOVIE_PAGE_CONTENT_KEY, JSON.stringify(moviePageResponse))
+
         return { moviePageContent: moviePageResponse }
     })),
     getMoviePageContent: async (type, id, pageContentResponseCallback) => {
-        const contentType = type === 'movie' ? 'movie/' : 'tv/'
+        const contentType =  type ? (type === 'movie' ? 'movie/' : 'tv/') : ''
+        const itemId = id !== null ? id : 0
 
-        axios.get<ApiContentPageResponse>(`${BASE_MOVIE_API_URL}${contentType}${id.toString()}?language=en-US`, axiosHeader)
+        if (itemId === 0) console.log('Movie ID was not found')
+        if (contentType === '') console.log('Movie type was not found')
+
+        axios.get<ApiContentPageResponse>(`${BASE_MOVIE_API_URL}${contentType}${itemId.toString()}?language=en-US`, axiosHeader)
             .then((result) => {
                 const movieTvResponse = (): MovieTvPageContent | undefined => {
                     const response = result.data
