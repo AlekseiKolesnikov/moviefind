@@ -110,8 +110,8 @@ export const useIcons = create<UseIcons>((set) => ({
         set((state) => ({
             providersIcons: state.providersIcons.map((icon) =>
                 (!useWindowSize.getState().isMobileScreen && icon.icon_id === id && icon.current_icon === icon.initial_icon)
-                    ? { ...icon, current_icon: icon.hovered_icon }
-                    : {...icon, current_icon: icon.initial_icon}
+                ? { ...icon, current_icon: icon.hovered_icon }
+                : { ...icon, current_icon: icon.initial_icon }
             ),
         }));
     }

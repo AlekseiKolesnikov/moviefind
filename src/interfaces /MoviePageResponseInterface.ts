@@ -1,3 +1,22 @@
+export interface MovieTvPageContent {
+    id: number,
+    title: string,
+    release_date: string,
+    release_year: string,
+    adult: boolean,
+    vote_average: number,
+    vote_count: number,
+    main_poster_path: string | null,
+    backdrop_poster_path: string | null,
+    imdb_id: string,
+    production_companies: ProductionCompany[],
+    production_countries: ProductionCountry[],
+    genres: Genre[],
+    overview: string,
+    runtime: number,
+    spoken_language: SpokenLanguage[],
+}
+
 interface MovieContentResponse {
     imdb_id: string;
     title: string;

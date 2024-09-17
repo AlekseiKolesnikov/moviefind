@@ -15,21 +15,24 @@ const axiosHeader = {
 const movieGenresUrl = "https://api.themoviedb.org/3/genre/movie/list?language=en"
 const seriesGenresUrl = "https://api.themoviedb.org/3/genre/tv/list?language=en"
 
-interface Dates  {
+interface Dates {
     maximum: string;
     minimum: string;
 }
+
 interface MovieResponse {
     original_title: string;
     release_date: string;
     title: string;
     video: boolean;
 }
+
 interface SeriesResponse {
     origin_country: string[],
     original_name: string;
     first_air_date: string;
 }
+
 interface SliderApiResponse extends MovieResponse, SeriesResponse, PeopleResult {
     adult: boolean;
     backdrop_path: string;
@@ -42,16 +45,19 @@ interface SliderApiResponse extends MovieResponse, SeriesResponse, PeopleResult 
     vote_average: number;
     vote_count: number;
 }
+
 interface ApiResponseMovie {
     dates: Dates;
 }
-interface ApiResponse extends ApiResponseMovie{
+
+interface ApiResponse extends ApiResponseMovie {
     page: number;
     results: SliderApiResponse[];
     total_pages: number;
     total_results: number;
 }
-interface SliderResponseBody  {
+
+interface SliderResponseBody {
     itemId: number,
     posterUrl: string,
     ranking: number,
@@ -63,20 +69,24 @@ interface SliderResponseBody  {
         date: string
     }
 }
-export interface SliderResponse  {
+
+export interface SliderResponse {
     sliderId: number,
     label: string,
     type: string,
     response: SliderResponseBody[]
 }
-export interface Genre  {
+
+export interface Genre {
     id: number;
     name: string;
 }
-interface GenresApiResponse  {
+
+interface GenresApiResponse {
     genres: Genre[];
 }
-interface UseSliderResponse  {
+
+interface UseSliderResponse {
     sliderResponse: SliderResponse[],
     slideGenres: Genre[],
     setSliderResponse: (response: SliderResponse) => void,
@@ -87,6 +97,7 @@ interface UseSliderResponse  {
     ) => void,
     getSlideGenres: () => void
 }
+
 interface KnownFor {
     adult: boolean;
     backdrop_path: string;
@@ -107,7 +118,8 @@ interface KnownFor {
     first_air_date?: string;
     origin_country?: string[];
 }
-interface PeopleResult  {
+
+interface PeopleResult {
     adult: boolean;
     gender: number;
     id: number;
@@ -204,9 +216,9 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
 
         axios.get<ApiResponse>(apiData.url, axiosHeader)
             .then((response) => {
-
                 const sliderResponse: SliderResponseBody[] = response.data.results.map((value) => {
                     const releaseYear = value.release_date ? value.release_date.substring(0, 4) : value.first_air_date.substring(0, 4)
+
                     return {
                         itemId: value.id,
                         posterUrl: `https://image.tmdb.org/t/p/w500${value.poster_path}`,
@@ -221,7 +233,12 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
                     }
                 })
 
-                sliderDataCallBack({ sliderId: apiData.id, label: apiData.label, type: apiData.type, response: sliderResponse })
+                sliderDataCallBack({
+                    sliderId: apiData.id,
+                    label: apiData.label,
+                    type: apiData.type,
+                    response: sliderResponse
+                })
             })
             .catch((error) => {
                 console.log(error)
