@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { ApiContentPageResponse, MovieTvPageContent } from "../interfaces /MoviePageResponseInterface.ts";
+import { ApiContentPageResponse, MovieTvPageContent } from "../interfaces /movie-page-response-interface.ts";
 import axios from "axios";
 import { MOVIE_PAGE_CONTENT_KEY } from "../data/local-storage-keys.ts";
 
-const API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MGRlZTQwNjJkZGM1NDI3NzI0ZTdjYmQ2YTg2ZTlhMSIsIm5iZiI6MTcyNTIyNjU4MS4xNTQ3NTUsInN1YiI6IjY0YjE5ZTQ2MGU0ZmM4MDBhZDVkMTA4NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.trEXym5ftq5vCjNXU63PAobmGngKZ_xDB1nKyYqs-NE";
+const API_TOKEN = import.meta.env.VITE_API_KEY
 const axiosHeader = {
     method: "GET",
     headers: {
@@ -24,27 +24,36 @@ interface MoviePageResponseInterface {
     ) => void
 }
 
-export const useMoviePageResponse = create<MoviePageResponseInterface>((set, get) => ({
+export const useMoviePageResponse = create<MoviePageResponseInterface>((set) => ({
     moviePageContent: [] as MovieTvPageContent[],
     setMoviePageContent: ((id, response) => set((state) => {
-        if (get().moviePageContent.length >= 2) {
-            state.moviePageContent.shift()
+        if (state.moviePageContent.length !== 0) {
+            if (state.moviePageContent[0].id !== id) {
+                state.moviePageContent.shift()
+                localStorage.removeItem(MOVIE_PAGE_CONTENT_KEY)
+            }
+
+        }
+
+        const getLocalStorageMovieData = (): MovieTvPageContent[] => {
+            const storedData = localStorage.getItem(MOVIE_PAGE_CONTENT_KEY)
+
+            return storedData ? JSON.parse(storedData) : null
         }
 
         const moviePageResponse = response ? state.moviePageContent
             .filter((content) => content.id !== id)
-            .concat(response) : state.moviePageContent
+            .concat(response) : getLocalStorageMovieData()
 
-        localStorage.setItem(MOVIE_PAGE_CONTENT_KEY, JSON.stringify(moviePageResponse))
+        if (response) {
+            localStorage.setItem(MOVIE_PAGE_CONTENT_KEY, JSON.stringify(moviePageResponse))
+        }
 
         return { moviePageContent: moviePageResponse }
     })),
     getMoviePageContent: async (type, id, pageContentResponseCallback) => {
-        const contentType =  type ? (type === 'movie' ? 'movie/' : 'tv/') : ''
+        const contentType = type ? (type === 'movie' ? 'movie/' : 'tv/') : ''
         const itemId = id !== null ? id : 0
-
-        if (itemId === 0) console.log('Movie ID was not found')
-        if (contentType === '') console.log('Movie type was not found')
 
         axios.get<ApiContentPageResponse>(`${BASE_MOVIE_API_URL}${contentType}${itemId.toString()}?language=en-US`, axiosHeader)
             .then((result) => {

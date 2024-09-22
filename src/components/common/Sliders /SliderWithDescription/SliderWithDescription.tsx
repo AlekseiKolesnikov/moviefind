@@ -8,16 +8,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/controller';
 import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
 import { SlideRanking } from "../SlideRanking/SlideRanking.tsx";
-import { useMoviePageResponse } from "../../../../states/useMoviePageResponse.ts";
-import { useMovieTVShowsNavigation } from "../../../../states/useMovieTVShowsNavigation.ts";
-import { useNavigate } from "react-router-dom";
-import { MovieTvPageContent } from "../../../../interfaces /MoviePageResponseInterface.ts";
+import { useHandleMoviePageResponse } from "../../../../hooks/useHandleMoviePageResponse.ts";
 
 export const SliderWithDescription = ({ sliderId, label, type }: { sliderId: number, label: string, type: string }) => {
-    const requestMoviePageContent = useMoviePageResponse((state) => state.getMoviePageContent)
-    const setMoviePageContentCallback = useMoviePageResponse((state) => state.setMoviePageContent)
-    const updateMovieTVShowsNavigation = useMovieTVShowsNavigation((state) => state.setMovieTVShowsRoutes)
-    const navigate = useNavigate()
+    const { handelMoviePageResponse } = useHandleMoviePageResponse()
 
     return (
         <div
@@ -63,22 +57,7 @@ export const SliderWithDescription = ({ sliderId, label, type }: { sliderId: num
                             key={data.itemId}
                             className="small-swiper__slide start-column-top-flex"
                             onClick={() => {
-                                requestMoviePageContent(
-                                    type,
-                                    data.itemId,
-                                    (response: MovieTvPageContent | undefined) => {
-                                        if (response) {
-                                            setMoviePageContentCallback(data.itemId, response)
-                                            navigate(useMovieTVShowsNavigation.getState().movieTVShowsRoutes.pathName, {
-                                                state: {
-                                                    id: data.itemId,
-                                                    type: type
-                                                }
-                                            })
-                                        }
-                                    }
-                                )
-                                updateMovieTVShowsNavigation(type, data.itemId.toString())
+                                handelMoviePageResponse(type, data.itemId)
                             }}
                         >
                             <SlideRanking

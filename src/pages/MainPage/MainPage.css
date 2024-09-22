@@ -1,23 +1,4 @@
 .layout__content-sider-container {
-    position: relative;
-    width: var(--desktop-content-container-width);
+    width: 100%;
     height: 100%;
-}
-
-@media screen and (min-width: 1105px) and (max-width: 1300px) {
-    .layout__content-sider-container {
-        max-width: var(--tablet-content-container-width);
-    }
-}
-
-@media screen and (max-width: 1105px) {
-    .layout__content-sider-container {
-        max-width: 100%;
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .layout__content-sider-container {
-        max-width: 100%;
-    }
 }

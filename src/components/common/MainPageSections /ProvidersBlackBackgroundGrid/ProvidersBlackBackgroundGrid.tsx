@@ -1,6 +1,6 @@
 import './ProvidersBlackBackgroundGrid.css'
-import '../../../assets/styles/flex-patterns.css';
-import { Icons, useIcons } from "../../../states/useIcons.ts";
+import '../../../../assets/styles/flex-patterns.css';
+import { Icons, useIcons } from "../../../../states/useIcons.ts";
 import { useEffect, useState } from "react";
 
 export const ProvidersBlackBackgroundGrid = () => {

@@ -2,17 +2,10 @@ import './SliderBlackBackground.css'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Mousewheel, Navigation } from "swiper/modules";
 import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
-import { useMoviePageResponse } from "../../../../states/useMoviePageResponse.ts";
-import { useMovieTVShowsNavigation } from "../../../../states/useMovieTVShowsNavigation.ts";
-import { useNavigate } from "react-router-dom";
-import { MovieTvPageContent } from "../../../../interfaces /MoviePageResponseInterface.ts";
+import { useHandleMoviePageResponse } from "../../../../hooks/useHandleMoviePageResponse.ts";
 
 export const SliderBlackBackground = ({ sliderId, label, type }: { sliderId: number, label: string, type: string }) => {
-    const requestMoviePageContent = useMoviePageResponse((state) => state.getMoviePageContent)
-    const setMoviePageContentCallback = useMoviePageResponse((state) => state.setMoviePageContent)
-    const updateMovieTVShowsNavigation = useMovieTVShowsNavigation((state) => state.setMovieTVShowsRoutes)
-    const navigate = useNavigate()
-
+    const { handelMoviePageResponse } = useHandleMoviePageResponse()
 
     return (
         <div
@@ -51,17 +44,7 @@ export const SliderBlackBackground = ({ sliderId, label, type }: { sliderId: num
                         key={data.itemId}
                         className="black-background-swiper__slide"
                         onClick={() => {
-                            requestMoviePageContent(
-                                type,
-                                data.itemId,
-                                (response: MovieTvPageContent | undefined) => {
-                                    if (response) {
-                                        setMoviePageContentCallback(data.itemId, response)
-                                        navigate(useMovieTVShowsNavigation.getState().movieTVShowsRoutes.pathName)
-                                    }
-                                }
-                            )
-                            updateMovieTVShowsNavigation(type, data.itemId.toString())
+                            handelMoviePageResponse(type, data.itemId)
                         }}
                     >
                         <img src={data.posterUrl} alt={data.itemId.toString()}/>

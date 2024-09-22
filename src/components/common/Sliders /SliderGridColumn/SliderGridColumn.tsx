@@ -1,20 +1,16 @@
 import './SliderGridColumn.css'
 import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
 import { CSSProperties } from "react";
-import { useMoviePageResponse } from "../../../../states/useMoviePageResponse.ts";
-import { useMovieTVShowsNavigation } from "../../../../states/useMovieTVShowsNavigation.ts";
-import { useNavigate } from "react-router-dom";
-import { MovieTvPageContent } from "../../../../interfaces /MoviePageResponseInterface.ts";
+import { useHandleMoviePageResponse } from "../../../../hooks/useHandleMoviePageResponse.ts";
 
-export const SliderGridColumn = ({ sliderId, columnSize, type }: {
+interface SliderGridColumnProps {
     sliderId: number,
     columnSize: number[],
     type: string
-}) => {
-    const requestMoviePageContent = useMoviePageResponse((state) => state.getMoviePageContent)
-    const setMoviePageContentCallback = useMoviePageResponse((state) => state.setMoviePageContent)
-    const updateMovieTVShowsNavigation = useMovieTVShowsNavigation((state) => state.setMovieTVShowsRoutes)
-    const navigate = useNavigate()
+}
+
+export const SliderGridColumn = ({ sliderId, columnSize, type }: SliderGridColumnProps) => {
+    const { handelMoviePageResponse } = useHandleMoviePageResponse()
 
     const moviePosterBottomBorderStyle: CSSProperties = {
         borderBottom: "solid var(--hoovered-light-gray-color) 1px",
@@ -28,17 +24,7 @@ export const SliderGridColumn = ({ sliderId, columnSize, type }: {
                         key={data.itemId}
                         className="grid-slider__movie-posters-container start-row-center-flex"
                         onClick={() => {
-                            requestMoviePageContent(
-                                type,
-                                data.itemId,
-                                (response: MovieTvPageContent | undefined) => {
-                                    if (response) {
-                                        setMoviePageContentCallback(data.itemId, response)
-                                        navigate(useMovieTVShowsNavigation.getState().movieTVShowsRoutes.pathName)
-                                    }
-                                }
-                            )
-                            updateMovieTVShowsNavigation(type, data.itemId.toString())
+                            handelMoviePageResponse(type, data.itemId)
                         }}
                     >
                         <div className="grid-slider__movie-ranking-number">{index + 1}.</div>

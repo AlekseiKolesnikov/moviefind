@@ -8,12 +8,13 @@ import 'swiper/css/pagination';
 import { SliderWithDescription } from "../../Sliders /SliderWithDescription/SliderWithDescription.tsx";
 import { useCallback, useEffect, useState } from "react";
 import { useRefs } from "../../../../hooks/useRefs.ts";
-import { SliderResponse, useSliderResponse } from "../../../../states/useSliderResponse.ts";
+import { useSliderResponse } from "../../../../states/useSliderResponse.ts";
 import { SliderBlackBackground } from "../../Sliders /SliderBlackBackground/SliderBlackBackground.tsx";
 import { useSliderSectionIntersectionObserver } from "../../../../states/useSliderSectionIntersectionObserver.ts";
 import { SliderGrid } from "../../Sliders /SliderGrid/SliderGrid.tsx";
-import { ProvidersBlackBackgroundGrid } from "../../ProvidersBlackBackgroundGrid/ProvidersBlackBackgroundGrid.tsx";
+import { ProvidersBlackBackgroundGrid } from "../../MainPageSections /ProvidersBlackBackgroundGrid/ProvidersBlackBackgroundGrid.tsx";
 import clsx from "clsx";
+import { SliderResponse } from "../../../../interfaces /slide-response-interface.ts";
 
 export const MainPageContent = () => {
     const windowPathName = window.location.pathname
@@ -45,7 +46,7 @@ export const MainPageContent = () => {
 
 
         const renderContent = () => {
-            if (index === 0 || index === 1) {
+            if (data.sliderId === 0 || data.sliderId === 1) {
                 return (
                     <SliderWithDescription
                         sliderId={data.sliderId}
@@ -55,7 +56,7 @@ export const MainPageContent = () => {
                     />
                 );
             }
-            if (index === 2 || index === 3) {
+            if (data.sliderId === 2 || data.sliderId === 3) {
                 return (
                     <div
                         className="main-page-content-container__black-background-content start-column-top-flex"
@@ -71,7 +72,7 @@ export const MainPageContent = () => {
                     </div>
                 );
             }
-            if (index === 4 || index === 5) {
+            if (data.sliderId === 4 || data.sliderId === 5) {
                 return (
                     <SliderGrid
                         sliderId={data.sliderId}
@@ -87,15 +88,15 @@ export const MainPageContent = () => {
         return (
             <section
                 className={clsx({
-                    'slider-black-background': index === 2 || index === 3,
-                    'slider-transparent-background': !(index === 2 || index === 3)
+                    'slider-black-background': data.sliderId === 2 || data.sliderId === 3,
+                    'slider-transparent-background': !(data.sliderId === 2 || data.sliderId === 3)
                 })}
-                style={index === 2 ? { paddingTop: 40 } : {}}
+                style={data.sliderId === 2 ? { paddingTop: 40 } : {}}
                 key={`${key}-slide-big-container`}
             >
                 <div
                     className={clsx('main-page-content-container__movie-series-content', {
-                        'start-row-center-flex': index === 4 || index === 5
+                        'start-row-center-flex': data.sliderId === 4 || data.sliderId === 5
                     })}
                     ref={(element) => setRef(element, data.sliderId.toString())}
                     key={`${key}-slide-container`}
@@ -107,7 +108,6 @@ export const MainPageContent = () => {
     }, [setRef]);
 
     return (
-
         <div
             className={clsx('main-page-content-container', 'space-between-column-start-flex', {
                 'notFullScreenWidth': handleResizeStates.isSideBarWhite,
