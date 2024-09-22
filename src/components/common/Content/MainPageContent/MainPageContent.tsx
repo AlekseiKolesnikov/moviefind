@@ -16,6 +16,14 @@ import { ProvidersBlackBackgroundGrid } from "../../MainPageSections /ProvidersB
 import clsx from "clsx";
 import { SliderResponse } from "../../../../interfaces /slide-response-interface.ts";
 
+const SliderSection = {
+    SliderGrid: "SLIDER_GRID",
+    SliderWithDescription: "SLIDER_WITH_DESCRIPTION",
+    SliderBlackBackground: "SLIDER_BLACK_BACKGROUND"
+} as const;
+
+type SliderSectionType = typeof SliderSection[keyof typeof SliderSection]
+
 export const MainPageContent = () => {
     const windowPathName = window.location.pathname
     const handleResizeStates = useHandelResize()
@@ -24,6 +32,9 @@ export const MainPageContent = () => {
     const [sliderResponse, setSliderResponse] = useState<SliderResponse[]>(useSliderResponse.getState().sliderResponse)
     const updateSliderSectionIntersectionObserver = useSliderSectionIntersectionObserver((state) => state.setIntersectionObserver)
     const getSlideGenres = useSliderResponse((state) => state.getSlideGenres)
+    const sliderWithDescription: SliderSectionType = SliderSection.SliderWithDescription
+    const sliderGrid: SliderSectionType = SliderSection.SliderGrid
+    const sliderBlackBackground: SliderSectionType = SliderSection.SliderBlackBackground
 
     useEffect(() => {
         setElementRefs(Object.values(refsByKey).filter(Boolean))
@@ -42,11 +53,11 @@ export const MainPageContent = () => {
     }, [])
 
     const renderSliderContent = useCallback((data: SliderResponse, index: number) => {
-        const key = `${data.sliderId}-${index}`;
+        const key = `${data.sliderId}-${data.sliderId}`;
 
 
         const renderContent = () => {
-            if (data.sliderId === 0 || data.sliderId === 1) {
+            if (data.sliderSectionType === sliderWithDescription) {
                 return (
                     <SliderWithDescription
                         sliderId={data.sliderId}
@@ -56,7 +67,7 @@ export const MainPageContent = () => {
                     />
                 );
             }
-            if (data.sliderId === 2 || data.sliderId === 3) {
+            if (data.sliderSectionType === sliderBlackBackground) {
                 return (
                     <div
                         className="main-page-content-container__black-background-content start-column-top-flex"
@@ -68,11 +79,11 @@ export const MainPageContent = () => {
                             type={data.type}
                             key={`${key}-black-background`}
                         />
-                        {index === 3 && <ProvidersBlackBackgroundGrid/>}
+                        {data.sliderId === 3 && <ProvidersBlackBackgroundGrid/>}
                     </div>
                 );
             }
-            if (data.sliderId === 4 || data.sliderId === 5) {
+            if (data.sliderSectionType === sliderGrid) {
                 return (
                     <SliderGrid
                         sliderId={data.sliderId}
@@ -88,15 +99,15 @@ export const MainPageContent = () => {
         return (
             <section
                 className={clsx({
-                    'slider-black-background': data.sliderId === 2 || data.sliderId === 3,
-                    'slider-transparent-background': !(data.sliderId === 2 || data.sliderId === 3)
+                    'slider-black-background': data.sliderSectionType === sliderBlackBackground,
+                    'slider-transparent-background': !(data.sliderSectionType === sliderBlackBackground)
                 })}
                 style={data.sliderId === 2 ? { paddingTop: 40 } : {}}
                 key={`${key}-slide-big-container`}
             >
                 <div
                     className={clsx('main-page-content-container__movie-series-content', {
-                        'start-row-center-flex': data.sliderId === 4 || data.sliderId === 5
+                        'start-row-center-flex': data.sliderSectionType === sliderGrid
                     })}
                     ref={(element) => setRef(element, data.sliderId.toString())}
                     key={`${key}-slide-container`}
@@ -105,7 +116,7 @@ export const MainPageContent = () => {
                 </div>
             </section>
         )
-    }, [setRef]);
+    }, [setRef, sliderBlackBackground, sliderGrid, sliderWithDescription]);
 
     return (
         <div

@@ -51,36 +51,42 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
     sliderResponse: [
         {
             sliderId: 0,
+            sliderSectionType: "SLIDER_WITH_DESCRIPTION",
             label: "Top Rated Movies",
             type: "movie",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 1,
+            sliderSectionType: "SLIDER_WITH_DESCRIPTION",
             label: "Top Rated Series",
             type: "tv",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 2,
+            sliderSectionType: "SLIDER_BLACK_BACKGROUND",
             label: "Now Paying Movies",
             type: "movie",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 3,
+            sliderSectionType: "SLIDER_BLACK_BACKGROUND",
             label: "Airing Today Series",
             type: "tv",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 4,
+            sliderSectionType: "SLIDER_GRID",
             label: "Trending Series",
             type: "tv",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
         },
         {
             sliderId: 5,
+            sliderSectionType: "SLIDER_GRID",
             label: "Upcoming Movies",
             type: "movie",
             response: Array.from({ length: 6 }, (_, index) => createDefaultResponse(index))
@@ -92,12 +98,14 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
             .map((value) => value.sliderId === response.sliderId ?
                 {
                     sliderId: response.sliderId,
+                    sliderSectionType: value.sliderSectionType,
                     label: response.label,
                     type: value.type,
                     response: response.response
                 } :
                 {
                     sliderId: value.sliderId,
+                    sliderSectionType: value.sliderSectionType,
                     label: value.label,
                     type: value.type,
                     response: value.response
@@ -112,6 +120,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
         const elementIndex = useSliderSectionIntersectionObserver.getState().sliderSection.findIndex((value) => value.id === elementId)
         const apiData = {
             url: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].apiUrl,
+            sectionType: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].sliderSectionType,
             id: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].id,
             label: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].label,
             type: useSliderSectionIntersectionObserver.getState().sliderSection[elementIndex].type
@@ -138,6 +147,7 @@ export const useSliderResponse = create<UseSliderResponse>((set) => ({
 
                 sliderDataCallBack({
                     sliderId: apiData.id,
+                    sliderSectionType: apiData.sectionType,
                     label: apiData.label,
                     type: apiData.type,
                     response: sliderResponse

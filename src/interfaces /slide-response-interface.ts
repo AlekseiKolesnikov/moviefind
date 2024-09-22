@@ -55,6 +55,7 @@ export interface SliderResponseBody {
 
 export interface SliderResponse {
     sliderId: number,
+    sliderSectionType: string,
     label: string,
     type: string,
     response: SliderResponseBody[]
@@ -100,4 +101,14 @@ export interface PeopleResult {
     popularity: number;
     profile_path: string;
     known_for: KnownFor[];
+}
+
+export type SliderSection = {
+    ref: HTMLDivElement | null,
+    isVisible: boolean
+    sliderSectionType: string
+    id: number
+    type: string
+    label: string
+    apiUrl: string
 }

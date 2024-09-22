@@ -59,14 +59,14 @@ export const useMoviePageResponse = create<MoviePageResponseInterface>((set) => 
             .then((result) => {
                 const movieTvResponse = (): MovieTvPageContent | undefined => {
                     const response = result.data
-                    const releaseYear = response.release_date ? response.release_date.substring(0, 4) : response.first_air_date.substring(0, 4)
+                    const responseDate = response.release_date ? new Date(response.release_date) : new Date(response.first_air_date)
 
                     try {
                         return {
                             id: response.id,
                             title: response.title || response.name,
-                            release_date: response.release_date || response.first_air_date,
-                            release_year: releaseYear,
+                            release_date: responseDate.getDate().toString(),
+                            release_year: responseDate.getFullYear().toString(),
                             adult: response.adult,
                             vote_average: response.vote_average,
                             vote_count: response.vote_count,
@@ -89,3 +89,4 @@ export const useMoviePageResponse = create<MoviePageResponseInterface>((set) => 
             })
     }
 }))
+
