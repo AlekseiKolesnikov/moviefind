@@ -9,7 +9,7 @@ export const AppFooter = () => {
             <div className="footer__container center-column-flex">
                 <div className="footer__social-media center-row-flex">
                     {footerSocialMediaIcons.map((icon) => (
-                        <FooterIcons iconSrc={icon.src} iconAlt={icon.alt}/>
+                        <FooterIcons iconSrc={icon.src} iconAlt={icon.alt} key={icon.alt + 1}/>
                     ))}
                 </div>
                 <ul className="footer__support-links">
@@ -27,7 +27,7 @@ export const AppFooter = () => {
                 </ul>
                 <div className="footer__stores center-row-flex">
                     {footerStoreIcons.map((icon) => (
-                        <FooterIcons iconSrc={icon.src} iconAlt={icon.alt}/>
+                        <FooterIcons iconSrc={icon.src} iconAlt={icon.alt} key={icon.alt + 1}/>
                     ))}
                 </div>
                 <div className="footer__copy-rights space-between-row-center-flex">

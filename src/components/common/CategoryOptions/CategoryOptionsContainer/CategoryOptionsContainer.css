@@ -1,12 +1,13 @@
 .category-options__container {
     width: 100%;
     height: fit-content;
+
+    .solid {
+        border-top: 1px solid var(--hoovered-light-gray-color);
+        padding-bottom: 15px;
+    }
 }
 
-hr.solid {
-    border-top: 1px solid var(--hoovered-light-gray-color);
-    padding-bottom: 15px;
-}
 
 .category-options__label {
     width: 100%;
