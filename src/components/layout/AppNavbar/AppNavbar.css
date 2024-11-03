@@ -1,6 +1,8 @@
 .navbar__options-container {
-    height: fit-content;
-    width: fit-content;
+    position: sticky;
+    top: 85px;
+    height: 160px;
+    width: 145px;
     padding: 5px 20px;
     gap: 12px;
 }

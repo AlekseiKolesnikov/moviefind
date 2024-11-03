@@ -1,15 +1,14 @@
 import './AppNavbar.css'
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
 import '../../../assets/styles/flex-patterns.css'
 import { HomeIcon } from "../../../assets/icons/HomeIcon.tsx";
 import { CameraIcon } from "../../../assets/icons/CameraIcon.tsx";
 import { ChairIcon } from "../../../assets/icons/ChairIcon.tsx";
 import { PeopleIcon } from "../../../assets/icons/PeopleIcon.tsx";
 import { Link } from "react-router-dom";
-import { useNavbarOption } from "../../../states/navbarOptionState.ts";
-import { useSideBarState } from "../../../states/sideBarState.ts";
-import { usePathNameState } from "../../../states/pathNameState.ts";
+import { useNavbarOption } from "../../../states/useNavbarOption.ts";
 import classNames from "classnames";
+import { useHandelResize } from "../../../hooks/useHandelResize.ts";
 
 interface INavbarSvgIcons {
     icon: ReactElement,
@@ -48,28 +47,17 @@ const selectedBlackClassName = classNames(' selected_black')
 const selectedWhiteClassName = classNames(' selected_white')
 
 export const AppNavbar = () => {
-    const [isSideBarWhite, setSideBarWhite] = useState(useSideBarState.getState().sideBarVisible)
-    const updateSideBarState = useSideBarState((state) => state.setSideBarState)
+    const handleResizeStates = useHandelResize()
     const updateNavbarOptionState = useNavbarOption((state) => state.setNavbarOption)
     const getNavbarOptionState = useNavbarOption((state) => state.navbarOptions)
     const windowPathName = window.location.pathname
-    const fontColorClassNames =  isSideBarWhite ? blackBackground : whiteBackground
+    const fontColorClassNames = handleResizeStates.isSideBarWhite ? blackBackground : whiteBackground
 
     useEffect(() => {
         const navbarOptionIndex = navbarSvgIcons.findIndex((icon) => icon.pagePathName === windowPathName);
         const selectedPathName = navbarSvgIcons[navbarOptionIndex]?.pagePathName;
         updateNavbarOptionState(selectedPathName);
     }, [updateNavbarOptionState, windowPathName])
-
-    useEffect(() => {
-        const handleResize = () => {
-            updateSideBarState(usePathNameState.getState().pathName)
-            setSideBarWhite(useSideBarState.getState().sideBarVisible)
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [isSideBarWhite, updateSideBarState]);
 
     return (
         <nav className="navbar__options-container space-between-column-start-flex">
@@ -82,7 +70,7 @@ export const AppNavbar = () => {
                         onClick={() => {
                             updateNavbarOptionState(navbarOption.pagePathName)
                         }}
-                        className={navbarOptionClassName + fontColorClassNames + startRowCenterFlexClassName + ` ${isSelected ? isSideBarWhite ? selectedBlackClassName : selectedWhiteClassName : ""}`}
+                        className={navbarOptionClassName + fontColorClassNames + startRowCenterFlexClassName + ` ${isSelected ? handleResizeStates.isSideBarWhite ? selectedBlackClassName : selectedWhiteClassName : ""}`}
                         to={navbarOption.pagePathName}>
                         <div
                             className={`navbar__option-icon center-flex 
