@@ -1,21 +1,100 @@
 @import "../../../assets/styles/variables.css";
 
-.footer-container {
+.footer {
     width: var(--desktop-content-container-width);
-    height: 150px;
+    height: fit-content;
     background: var(--bacground-color);
+    padding: var(--desktop-screen-content-side-padding);
+    font: var(--main-text);
 }
 
+.footer__container {
+    width: 100%;
+    height: fit-content;
+    gap: 40px;
+    padding: 0 100px;
+}
+
+.footer__social-media {
+    width: 100%;
+    height: fit-content;
+    gap: 20px;
+}
+
+.footer__support-links {
+    display: inline-block;
+    max-width: 100%;
+    width: 700px;
+    height: fit-content;
+    list-style-type: disc;
+    text-align: center;
+}
+
+.footer__support-link {
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    color: var(--footer-unhovered-color);
+    margin-block-end: 15px;
+    padding-inline-end: 27px;
+}
+
+.footer__stores {
+    gap: 20px;
+}
+
+.footer__copy-rights {
+    width: 100%;
+    height: fit-content;
+    color: var(--footer-unhovered-color);
+}
+
+.footer__project-founder-name {
+    font: var(--main-text-bigger-bolder);
+}
+
+@media screen and (min-width: 450px) {
+    .footer__support-link:hover {
+        cursor: pointer;
+        color: var(--footer-hovered-color);
+    }
+
+    .footer__project-founder-name:hover {
+        cursor: pointer;
+        color: var(--footer-hovered-color);
+    }
+}
 
 @media screen and (min-width: 1105px) and (max-width: 1300px) {
-    .footer-container {
+    .footer {
         width: var(--tablet-content-container-width);
     }
 }
 
+@media screen and (max-width: 1105px) {
+    .footer {
+        max-width: 100%;
+    }
+}
 
-@media screen and (max-width: 1000px) {
-    .footer-container {
-        width: 100%;
+@media screen and (max-width: 450px) {
+    .footer__support-links {
+        min-width: 165px;
+    }
+
+    .footer__stores,
+    .footer__copy-rights {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer__support-link,
+    .footer__project-release-date,
+    .footer__project-founder {
+        text-align: center;
+        padding-inline-end: 0;
     }
 }

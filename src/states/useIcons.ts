@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { useWindowSize } from "./useWindowSize.ts";
 
-export interface ProvidersIcons {
+export interface Icons {
     icon_id: string,
     hovered_icon: string,
     initial_icon: string,
@@ -10,12 +10,12 @@ export interface ProvidersIcons {
     isHovered: boolean
 }
 
-interface UseProvidersIcons {
-    providersIcons: ProvidersIcons[]
+interface UseIcons {
+    providersIcons: Icons[],
     setProvidersIcons: (id: string) => void
 }
 
-export const useProvidersIcons = create<UseProvidersIcons>((set) => ({
+export const useIcons = create<UseIcons>((set) => ({
     providersIcons: [
         {
             icon_id: "tv",
@@ -109,7 +109,7 @@ export const useProvidersIcons = create<UseProvidersIcons>((set) => ({
     setProvidersIcons: (id: string) => {
         set((state) => ({
             providersIcons: state.providersIcons.map((icon) =>
-                useWindowSize((state) => state.isDesktopScreen) && icon.icon_id === id && icon.current_icon === icon.initial_icon
+                (!useWindowSize.getState().isMobileScreen && icon.icon_id === id && icon.current_icon === icon.initial_icon)
                     ? { ...icon, current_icon: icon.hovered_icon }
                     : {...icon, current_icon: icon.initial_icon}
             ),

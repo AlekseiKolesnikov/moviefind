@@ -79,7 +79,7 @@ export const AppContent = () => {
         }
 
         return (
-            <div
+            <section
                 className={clsx({
                     'slider-black-background': index === 2 || index === 3,
                     'slider-transparent-background': !(index === 2 || index === 3)
@@ -96,7 +96,7 @@ export const AppContent = () => {
                 >
                     {renderContent()}
                 </div>
-            </div>
+            </section>
         )
     }, [setRef]);
 
@@ -107,7 +107,7 @@ export const AppContent = () => {
                 'fullScreenWidth': !handleResizeStates.isSideBarWhite
             })}
         >
-            <div className="content-container__trailer-content center-flex">
+            <section className="content-container__trailer-content center-flex">
                 {windowPathName !== '/' && (
                     <div className="list-option-pages">
                         <CategoryOptionsContainer/>
@@ -117,7 +117,7 @@ export const AppContent = () => {
                 {windowPathName === '/' && window.innerWidth > 900 && (
                     <VideoTrailerFeature/>
                 )}
-            </div>
+            </section>
             {windowPathName === '/' && sliderResponse.map(renderSliderContent)}
         </div>
     );

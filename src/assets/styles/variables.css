@@ -15,6 +15,8 @@
     --hoovered-gray-color: #191919;
     --hoovered-light-gray-color: #F1F1F1;
     --grid-providers-color: #151515F2;
+    --footer-hovered-color: #919191;
+    --footer-unhovered-color: #717171;
 }
 /*-------SIZES---------------------------------------------------*/
 :root {
