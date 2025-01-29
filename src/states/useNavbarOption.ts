@@ -5,12 +5,12 @@ type NavbarOption = {
     isSelected: boolean,
 }
 
-type NavbarOptionState = {
+type UseNavbarOption = {
     navbarOptions: NavbarOption[],
     setNavbarOption: (pathName: string) => void
 }
 
-export const useNavbarOption = create<NavbarOptionState>((set) => ({
+export const useNavbarOption = create<UseNavbarOption>((set) => ({
     navbarOptions: [
         {
             pathName: "/",

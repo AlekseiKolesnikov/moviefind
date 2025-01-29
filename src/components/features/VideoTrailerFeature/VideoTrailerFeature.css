@@ -1,6 +1,7 @@
 .video-trailer__container {
     width: 100%;
     height: auto;
+    margin-bottom: 40px;
 }
 
 .video-trailer__video {

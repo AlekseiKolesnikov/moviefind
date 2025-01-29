@@ -2,7 +2,7 @@ import './AppHeader.css'
 import '../../../assets/styles/flex-patterns.css'
 import { useEffect, useRef, useState } from "react";
 import { AppNavbar } from "../AppNavbar/AppNavbar.tsx";
-import { useSideBarState } from "../../../states/sideBarState.ts";
+import { useSideBar } from "../../../states/useSideBar.ts";
 import { useHandelResize } from "../../../hooks/useHandelResize.ts";
 
 export const AppHeader = () => {
@@ -15,7 +15,7 @@ export const AppHeader = () => {
             const targetElement = event.target as Element;
 
             if (
-                useSideBarState.getState().sideBarSlideOutSide &&
+                useSideBar.getState().sideBarSlideOutSide &&
                 sideBarRef.current &&
                 !sideBarRef.current.contains(event.target as Node) &&
                 !targetElement.classList.contains('sidebar') &&
