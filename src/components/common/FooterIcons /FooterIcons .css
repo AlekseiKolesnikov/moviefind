@@ -1,11 +1,13 @@
 .footer-logo {
     width: fit-content;
     height: fit-content;
+    background-color: transparent;
 }
 
 .footer-logo__image {
     width: fit-content;
     height: fit-content;
+    background-color: transparent;
 }
 
 @media screen and (min-width: 450px) {

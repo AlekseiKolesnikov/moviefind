@@ -1,0 +1,106 @@
+.swiper-slide {
+    overflow-y: hidden;
+}
+.swiper-wrapper {
+    width: 100%;
+}
+
+.small-swiper__swiper-settings::-webkit-scrollbar {
+    display: none;
+}
+
+.small-swiper__container {
+    width: 100%;
+    height: auto;
+    padding-bottom: 15px ;
+
+    p {
+        font: var(--subheading-text-thiner);
+        padding-bottom: 15px;
+    }
+}
+
+.small-swiper__slide-container {
+    width: 100%;
+    height: fit-content;
+}
+
+.small-swiper__swiper-settings {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    overflow: scroll;
+    place-content: center;
+}
+
+.small-swiper__slide {
+    text-align: center;
+    font-size: 18px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: black;
+}
+
+.small-swiper__slide img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1.5;
+    object-fit: cover;
+}
+
+.small-swiper__slide-inf-container {
+    width: 100%;
+    height: fit-content;
+    gap: 5px;
+}
+
+.small-swiper__movie-label {
+    font: var(--main-text-bold);
+    text-align: left;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.small-swiper__year-genres-container {
+    gap: 2px;
+}
+
+.small-swiper__movie-release-year {
+    gap: 2px;
+    span {
+        font: var(--subscript-text-bigger);
+        text-align: left;
+        color: var(--unhoovered-color);
+        p {
+            width: fit-content;
+            font: var(--subscript-text-bigger);
+            color: var(--unhoovered-color);
+        }
+    }
+}
+
+.small-swiper__genres-container {
+    gap: 2px;
+}
+
+@media screen and (max-width: 450px) {
+    .small-swiper__swiper-settings,
+    .swiper-wrapper {
+        padding-right: var(--mobile-screen-content-padding);
+    }
+}
+
+@media screen and (min-width: 450px) {
+    .swiper-slide:hover {
+        cursor: pointer;
+
+        .small-swiper__movie-label {
+            color: var(--accent-color);
+        }
+    }
+}
