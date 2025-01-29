@@ -1,0 +1,13 @@
+.content-container {
+    width: 80%;
+    height: 100%;
+    background: darkblue;
+}
+
+@media screen and (max-width: 1300px) {
+    .content-container {
+        width: 100%;
+        height: 100%;
+        background: darkblue;
+    }
+}
