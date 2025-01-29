@@ -82,17 +82,12 @@ aside.visible {
 }
 
 .header__menu-icon {
-    display: none;
     height: fit-content;
     width: fit-content;
     color: var(--unhoovered-color);
 }
 
 @media screen and (max-width: 1300px) {
-    .header__menu-icon {
-        display: block;
-    }
-
     .header__container {
         width: 940px;
         height: 100%;
@@ -101,12 +96,6 @@ aside.visible {
     .header__logo-container:hover {
         cursor: pointer;
         color: var(--text-color);
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .header__menu-icon {
-        display: block;
     }
 }
 
@@ -122,4 +111,12 @@ aside.visible {
     .menu-is-hovered.gray-background {
         animation: slideOut 0.5s forwards;
     }
+}
+
+.header__menu-icon-visible {
+    display: block;
+}
+
+.header__menu-icon-hidden {
+    display: none;
 }
