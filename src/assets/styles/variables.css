@@ -1,6 +1,15 @@
 /*-----------COLORS-------------------------------------------------*/
 :root {
-
+    --body-color: #f4f4f4;
+    --secondary-background-color: #ffff;
+    --bacground-color: #141414;
+    --text-color: #000;
+    --accent-color: #ff5500;
+    --unhoovered-color: #636363;
+    --header-height: 60px;
+    --content-height: calc(100vh - 210px);
+    --navbar-width: 170px;
+    --hoovered-gray-color: #191919;
 }
 /*-------SIZES---------------------------------------------------*/
 :root {
@@ -11,13 +20,12 @@
 
 /*--------FONTS----------------------------------------------------*/
 :root {
-    --heading-text: 900 30px/1 'Be Vietnam Pro', sans-serif;
-    --super-heading-text: 900 50px/1.2 'Be Vietnam Pro', sans-serif;
-    --subheading-text: 900 20px/1.4 'Be Vietnam Pro', sans-serif;
-    --subheading-text-bigger: 900 22px/1.4 'Be Vietnam Pro', sans-serif;
-    --main-text: 400 16px/1.4 'Be Vietnam Pro', sans-serif;
-    --main-text-bold: 700 16px/1.4 'Be Vietnam Pro', sans-serif;
-    --main-text-bigger-bold: 900 18px/1 'Be Vietnam Pro', sans-serif;
-    --subscript-text-bold: 900 12px/1.2 'Be Vietnam Pro', sans-serif;
-    --subscript-text: 400 12px/1.2 'Be Vietnam Pro', sans-serif;
+    --heading-text: 800 30px/1.4 'Be Vietnam Pro', sans-serif;
+    --subheading-text-bigger: 800 22px/1.4 'Be Vietnam Pro', sans-serif;
+    --subheading-text: 800 19px/1.4 'Be Vietnam Pro', sans-serif;
+    --main-text: 400 14px/1.2 'Be Vietnam Pro', sans-serif;
+    --main-text-bold: 600 14px/1.2 'Be Vietnam Pro', sans-serif;
+    --main-text-bigger-bolder: 800 17px/1.2 'Be Vietnam Pro', sans-serif;
+    --subscript-text-bold: 800 10px/1 'Be Vietnam Pro', sans-serif;
+    --subscript-text: 400 10px/1 'Be Vietnam Pro', sans-serif;
 }

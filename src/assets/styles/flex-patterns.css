@@ -10,6 +10,12 @@
     justify-content: flex-start;
 }
 
+.center-flex-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .start-center-flex {
     display: flex;
     align-items: flex-start;
@@ -25,6 +31,13 @@
 .center-column-top-flex {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.start-column-top-flex {
+    display: flex;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
 }
