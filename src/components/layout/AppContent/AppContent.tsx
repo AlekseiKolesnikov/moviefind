@@ -19,6 +19,7 @@ import { SliderGrid } from "../../common/SliderGrid/SliderGrid.tsx";
 import {
     ProvidersBlackBackgroundGrid
 } from "../../common/ProvidersBlackBackgroundGrid/ProvidersBlackBackgroundGrid.tsx";
+import clsx from "clsx";
 
 export const AppContent = () => {
     const windowPathName = window.location.pathname
@@ -72,19 +73,24 @@ export const AppContent = () => {
             }
             if (index === 4 || index === 5) {
                 return (
-                    <SliderGrid sliderId={data.sliderId} label={data.label} key={`${key}-description`}/>
+                    <SliderGrid sliderId={data.sliderId} label={data.label} index={index} key={`${key}-description`}/>
                 );
             }
         }
 
         return (
             <div
-                className={index === 2 || index === 3 ? "slider-black-background" : "slider-transparent-background"}
+                className={clsx({
+                    'slider-black-background': index === 2 || index === 3,
+                    'slider-transparent-background': !(index === 2 || index === 3)
+                })}
                 style={index === 2 ? { paddingTop: 40 } : {}}
                 key={`${key}-slide-big-container`}
             >
                 <div
-                    className="content-container__movie-series-content"
+                    className={clsx('content-container__movie-series-content', {
+                        'start-row-center-flex': index === 4 || index === 5
+                    })}
                     ref={(element) => setRef(element, data.sliderId.toString())}
                     key={`${key}-slide-container`}
                 >
@@ -96,7 +102,10 @@ export const AppContent = () => {
 
     return (
         <div
-            className={`content-container ${handleResizeStates.isSideBarWhite ? "notFullScreenWidth" : "fullScreenWidth"} space-between-column-start-flex`}
+            className={clsx('content-container', 'space-between-column-start-flex', {
+                'notFullScreenWidth': handleResizeStates.isSideBarWhite,
+                'fullScreenWidth': !handleResizeStates.isSideBarWhite
+            })}
         >
             <div className="content-container__trailer-content center-flex">
                 {windowPathName !== '/' && (
